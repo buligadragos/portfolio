@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="Logo" src="https://raw.githubusercontent.com/buligadragos/portfolio/main/src/images/favicon.png?token=AHA2GSLIBJLSSHOOR3GSRLDAW2QNK" width="200" />
+  <img alt="Logo" src="https://raw.githubusercontent.com/buligadragos/portfolio/main/src/images/favicon.png" width="200" />
 </div>
 <h1 align="center">
   Folio 21'
@@ -19,8 +19,13 @@
 </p>
 
 <p align="center">
-    <img src="https://vercelbadge.vercel.app/api/buligadragos/portfolio?style=flat-square" alt="Vercel Status" />
+<a href="https://www.codacy.com/gh/buligadragos/portfolio/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=buligadragos/portfolio&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/39b01ddab5794a2d83c774f1e9d3a92f"/></a>    <a href="https://www.codefactor.io/repository/github/buligadragos/portfolio"><img src="https://www.codefactor.io/repository/github/buligadragos/portfolio/badge" alt="CodeFactor" /></a>
 </p>
+<p align="center">
+    <img src="https://therealsujitk-vercel-badge.vercel.app/?app=portfolio-buligadragos&style=flat-square" />
+    <img src="https://img.shields.io/uptimerobot/ratio/7/m788254236-9fa9197c1447330a954771be?style=flat-square" alt="Uptime Status" />
+</p>
+
 
 ![demo](https://github.com/buligadragos/portfolio/blob/main/static/og.png?raw=true)
 
