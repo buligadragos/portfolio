@@ -1,0 +1,17 @@
+name: Bump & release
+
+on:
+  push: # Ensure a new release is created for each new tag
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  release-on-push:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - 
+        uses: undergroundwires/bump-everywhere@master
+        with:
+          commit-message: '⬆️ bump to {{version}}'
