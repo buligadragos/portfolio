@@ -202,13 +202,6 @@ const WorksPage = ({ data }) => {
     revealProjects.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 10)));
   }, []);
 
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-    });
-  }, []);
-
   return (
     <>
       <Helmet title="Archive" />

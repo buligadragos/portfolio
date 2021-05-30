@@ -11,9 +11,7 @@ export const shouldUpdateScroll = ({ routerProps: { location }, getSavedScrollPo
   // if it's a "normal" route
   if (location.action === 'PUSH') {
     window.setTimeout(() => window.scrollTo(0, 0), TRANSITION_DELAY);
-  }
-  // if we used the browser's forwards or back button
-  else {
+  } else {
     const savedPosition = getSavedScrollPosition(location) || [0, 0];
     window.setTimeout(() => window.scrollTo(...savedPosition), TRANSITION_DELAY);
   }

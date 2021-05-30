@@ -159,8 +159,6 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = ['JavaScript (ES6+)', 'React', 'WordPress'];
-
   const TiltImg = () => (
     <Tilt
       tiltMaxAngleX={30}
@@ -214,7 +212,9 @@ const About = () => {
           </div>
 
           <ul className="skills-list">
-            {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
+            <li>JavaScript (ES6+)</li>
+            <li>React</li>
+            <li>WordPress</li>
           </ul>
         </StyledText>
 

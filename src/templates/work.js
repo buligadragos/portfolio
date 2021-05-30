@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { graphql, Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
@@ -437,12 +437,6 @@ const WorkTemplate = ({ data, pageContext }) => {
     firstsection,
     parrlax,
   } = frontmatter;
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-    });
-  }, []);
 
   return (
     <>
