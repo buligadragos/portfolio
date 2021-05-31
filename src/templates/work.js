@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Parallax, Background } from 'react-parallax';
-import Img from 'gatsby-image';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import { motion } from 'framer-motion';
 import { scale } from '../utils/index';
 import { ScrollAnimation, ScrollForMore } from '@components';
@@ -379,6 +379,10 @@ const WorkTemplate = ({ data, pageContext }) => {
     firstsection,
     parrlax,
   } = frontmatter;
+  const herodesktopimg = getImage(herodesk);
+  const heromobileimg = getImage(heromobile);
+  const firstsectionimg = getImage(firstsection);
+  const parrlaximg = getImage(parrlax);
 
   return (
     <>
@@ -426,8 +430,8 @@ const WorkTemplate = ({ data, pageContext }) => {
 
       <StyledPostContainer>
         <HeroImage>
-          <Img
-            fluid={width >= 500 ? herodesk.childImageSharp.fluid : heromobile.childImageSharp.fluid}
+          <GatsbyImage
+            image={width >= 500 ? herodesktopimg : heromobileimg}
             alt={title}
             className="img"
           />
@@ -479,13 +483,13 @@ const WorkTemplate = ({ data, pageContext }) => {
 
         <SectionOne>
           <SectionOneImageOne>
-            <Img fluid={firstsection.childImageSharp.fluid} alt={title} className="img" />
+            <GatsbyImage image={firstsectionimg} alt={title} className="img" />
           </SectionOneImageOne>
 
           <SectionOneImageTwo>
             <Parallax strength={-100} className="parrlex-right">
               <Background>
-                <Img fluid={firstsection.childImageSharp.fluid} alt={title} className="img" />
+                <GatsbyImage image={firstsectionimg} alt={title} className="img" />
               </Background>
             </Parallax>
           </SectionOneImageTwo>
@@ -493,7 +497,7 @@ const WorkTemplate = ({ data, pageContext }) => {
 
         <Parallax strength={200}>
           <Background>
-            <Img fluid={parrlax.childImageSharp.fluid} alt={title} className="img-par" />
+            <GatsbyImage image={parrlaximg} alt={title} className="img-par" />
           </Background>
         </Parallax>
 
@@ -564,33 +568,25 @@ export const pageQuery = graphql`
         external
         client
         heromobile {
-          childImageSharp {
-            fluid(maxWidth: 10000) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
+                childImageSharp {
+                  gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+                }
+              }
         herodesk {
-          childImageSharp {
-            fluid(maxWidth: 10000) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
+                childImageSharp {
+                  gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+                }
+              }
         firstsection {
-          childImageSharp {
-            fluid(maxWidth: 10000) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
+                childImageSharp {
+                  gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+                }
+              }
         parrlax {
-          childImageSharp {
-            fluid(maxWidth: 10000) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
+                childImageSharp {
+                  gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
+                }
+              }
         slug
       }
     }

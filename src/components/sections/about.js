@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
+import { StaticImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import { srConfig } from '@config';
 import sr from '@utils/sr';
 import Tilt from 'react-parallax-tilt';
 import { Icon } from '@components/icons';
+
 
 const StyledAboutSection = styled.section`
   max-width: 900px;
@@ -70,10 +70,6 @@ const StyledPic = styled.div`
     &:focus {
       background: transparent;
       outline: 0;
-      &:after {
-        top: 15px;
-        left: 15px;
-      }
       .img {
         filter: none;
         mix-blend-mode: normal;
@@ -81,30 +77,13 @@ const StyledPic = styled.div`
     }
 
   .img {
-    position: relative;
-    border-radius: var(--border-radius);
     mix-blend-mode: multiply;
     filter: grayscale(100%) contrast(1);
     transition: var(--transition);
   }
-
-
-
 `;
 
 const About = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      avatar: file(sourceInstanceName: { eq: "images" }, relativePath: { eq: "me.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 500, traceSVG: { color: "#64ffda" }) {
-            ...GatsbyImageSharpFluid_withWebp_tracedSVG
-          }
-        }
-      }
-    }
-  `);
-
   const revealContainer = useRef(null);
 
   useEffect(() => {
@@ -113,15 +92,24 @@ const About = () => {
 
   const TiltImg = () => (
     <Tilt
-      tiltMaxAngleX={30}
-      tiltMaxAngleY={30}
+      className="parallax-effect"
       perspective={1300}
-      transitionSpeed={1500}
-      scale={1.1}
-      gyroscope={true}>
-      <Img fluid={data.avatar.childImageSharp.fluid} alt="Avatar" className="img" />
+      glareEnable={true}
+      transitionSpeed={5500}
+      glareMaxOpacity={0.25}
+      scale={1.15}
+    >
+      <StaticImage
+        className="img"
+        src="../../images/me.jpg"
+        width={500}
+        quality={95}
+        formats={['AUTO', 'WEBP', 'AVIF']}
+        alt="Avatar"
+      />
     </Tilt>
   );
+
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
