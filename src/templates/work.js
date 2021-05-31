@@ -10,7 +10,6 @@ import { scale } from '../utils/index';
 import { ScrollAnimation, ScrollForMore } from '@components';
 import { Icon, IconArrow } from '@components/icons';
 import { windowDimensions } from '@hooks';
-import { mixins } from '@styles';
 
 const StyledPostContainer = styled.div`
   width: 100%;
@@ -119,47 +118,6 @@ const StyledWorkDesc4 = styled.div`
     margin: 0 0 15px 0;
   }
 
-  a {
-    ${mixins.inlineLink};
-    display: inline-block;
-    flex-direction: row;
-    align-items: flex-start;
-    cursor: pointer;
-  }
-
-  a:hover {
-    outline: 0;
-
-    &:after {
-      width: 100%;
-    }
-
-    & > * {
-      color: var(--accent) !important;
-      transition: var(--transition);
-    }
-  }
-
-  a:after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 1px;
-    position: relative;
-    bottom: 0.37em;
-    background-color: var(--accent);
-    transition: var(--transition);
-    opacity: 0.5;
-  }
-
-  svg {
-    width: 1em;
-    height: 1em;
-    bottom: 8px;
-    position: absolute;
-    margin-left: 0.4vw;
-  }
-
   @media (max-width: 550px) {
     flex: 1 0 100%;
     margin-bottom: 20px;
@@ -180,10 +138,8 @@ const HeroImage = styled.div`
 `;
 
 const Wrapper = styled.div`
-  @media screen and (min-width: 50px) {
     height: 100vh;
     width: 100%;
-  }
 `;
 
 const Container = styled(motion.div)`
@@ -302,30 +258,16 @@ const NavigateElement = styled.div`
   a {
     font-size: var(--fz-xl);
     transition: transform 0.7s cubic-bezier(0.4, 0, 0, 1);
+
+    &:hover .icons svg line{
+      stroke: var(--accent);
+    }
   }
 
-  a:hover .icons svg line {
-    stroke: var(--accent);
-  }
-
-  .prev {
-    cursor: w-resize;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .home {
-    cursor: n-resize;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .next {
-    cursor: e-resize;
+  .prev,
+  .home,
+  .next{
+    cursor: pointer;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -521,13 +463,13 @@ const WorkTemplate = ({ data, pageContext }) => {
           <StyledWorkDesc4>
             <p className="desc">Links</p>
             {external && (
-              <a href={external} aria-label="External Link" className="subtitle">
+              <a href={external} aria-label="External Link" className="subtitle inline-link">
                 Launch website
                 <Icon name="External" />
               </a>
             )}
             {github && (
-              <a href={github} aria-label="GitHub Link" className="subtitle">
+              <a href={github} aria-label="GitHub Link" className="subtitle inline-link">
                 View code
                 <Icon name="GitHub" />
               </a>

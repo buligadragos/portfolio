@@ -7,7 +7,6 @@ import { srConfig } from '@config';
 import sr from '@utils/sr';
 import { Icon, IconHome } from '@components/icons';
 import { motion } from 'framer-motion';
-import { mixins } from '@styles';
 
 const StyledHeader = styled.div`
   text-align: center;
@@ -120,7 +119,9 @@ const StyledTableContainer = styled.div`
           align-items: center;
 
           a {
-            ${mixins.flexCenter};
+            display: flex;
+            justify-content: center;
+            align-items: center;
             flex-shrink: 0;
           }
 
@@ -138,30 +139,6 @@ const StyledArchiveLink = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 80px auto 0;
-
-  .archive-link {
-    font-family: var(--font-sans);
-    font-size: var(--fz-xl);
-    &:after {
-      bottom: 0.1em;
-    }
-  }
-
-  .home-butt {
-    ${mixins.svgButton};
-  }
-
-  .home-hid {
-    transform: translate3d(0, 240%, 0);
-  }
-
-  a:hover .icons .home-visi {
-    transform: translate3d(0, -240%, 0);
-  }
-
-  a:hover .icons .home-hid {
-    transform: translate3d(0, 0, 0);
-  }
 `;
 
 const Icons = styled.span`
@@ -284,11 +261,11 @@ const WorksPage = ({ data }) => {
           </table>
         </StyledTableContainer>
         <StyledArchiveLink ref={revealButton}>
-          <Link className="home-butt" to="/">
+          <Link className="svgbutton" to="/">
             Back to home
             <Icons className="icons">
-              <IconHome className="home-visi" />
-              <IconHome className="home-hid" />
+              <IconHome className="svgicon-vis" />
+              <IconHome className="svgicon-hide" />
             </Icons>
           </Link>
         </StyledArchiveLink>

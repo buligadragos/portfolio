@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import sr from '@utils/sr';
 import { srConfig } from '@config';
 import { Icon, IconArchive } from '@components/icons';
-import { mixins } from '@styles';
 
 const Icons = styled.span`
   position: relative;
@@ -31,7 +30,9 @@ const Icons = styled.span`
 `;
 
 const StyledProjectsGrid = styled.ul`
-  ${mixins.resetList};
+  list-style: none;
+  padding: 0;
+  margin: 0;
 
   a {
     position: relative;
@@ -96,7 +97,9 @@ const StyledProject = styled.li`
     color: var(--headline);
 
     a {
-      ${mixins.flexCenter};
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: 0 0 0 20px;
 
       &.external {
@@ -248,22 +251,6 @@ const StyledArchiveLink = styled.div`
       bottom: 0.1em;
     }
   }
-
-  .archive-butt {
-    ${mixins.svgButton};
-  }
-
-  .archive-hid {
-    transform: translate3d(0, 240%, 0);
-  }
-
-  a:hover .icons .archive-visi {
-    transform: translate3d(0, -240%, 0);
-  }
-
-  a:hover .icons .archive-hid {
-    transform: translate3d(0, 0, 0);
-  }
 `;
 
 const Featured = () => {
@@ -376,11 +363,11 @@ const Featured = () => {
           })}
 
         <StyledArchiveLink>
-          <Link className="archive-butt" to="/works" ref={revealArchiveLink}>
+          <Link className="svgbutton" to="/works" ref={revealArchiveLink}>
             View the archive
             <Icons className="icons">
-              <IconArchive className="archive-visi" />
-              <IconArchive className="archive-hid" />
+              <IconArchive className="svgicon-vis" />
+              <IconArchive className="svgicon-hide" />
             </Icons>
           </Link>
         </StyledArchiveLink>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {
@@ -50,13 +50,6 @@ const IndexPage = () => {
     ym = 73;
     scalem = 0.2;
   }
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-    });
-  }, []);
 
   return (
     <>

@@ -6,7 +6,6 @@ import { srConfig } from '@config';
 import sr from '@utils/sr';
 import Tilt from 'react-parallax-tilt';
 import { Icon } from '@components/icons';
-import { mixins } from '@styles';
 
 const StyledAboutSection = styled.section`
   max-width: 900px;
@@ -48,58 +47,11 @@ const StyledText = styled.div`
     }
   }
 
-  a {
-    display: inline-block;
-    flex-direction: row;
-    align-items: flex-start;
-    cursor: pointer;
-    font-family: var(--font-sans);
-  }
-
-  a:hover {
-    color: var(--accent);
-    outline: 0;
-
-    &:after {
-      width: 100%;
-    }
-
-    & > * {
-      color: var(--accent) !important;
-      transition: var(--transition);
-    }
-  }
-
-  a:after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 1px;
-    position: relative;
-    bottom: 0.37em;
-    background-color: var(--accent);
-    transition: var(--transition);
-    opacity: 0.5;
-  }
-
-  svg {
-    width: 1em;
-    height: 1em;
-    bottom: 8px;
-    position: absolute;
-    margin-left: 0.4vw;
-  }
-
-  p {
-    & > a {
-      ${mixins.inlineLink};
-    }
-  }
-
   .subtitle {
     cursor: context-menu;
   }
 `;
+
 const StyledPic = styled.div`
   position: relative;
   max-width: 300px;
@@ -188,9 +140,9 @@ const About = () => {
             <p>
               Fast-forward to today, I’m now focusing on web apps and data analysis, am currently
               pursuing my Master of Science in E-Business at{' '}
-              <a href="https://www.ubbcluj.ro/en/">Babes-Bolyai University</a>, and working as a
+              <a href="https://www.ubbcluj.ro/en/" className="inline-link">Babes-Bolyai University</a>, and working as a
               freelancer on{' '}
-              <a href="https://www.upwork.com/freelancers/~0187fc4de875739745">Upwork</a>.{' '}
+              <a href="https://www.upwork.com/freelancers/~0187fc4de875739745" className="inline-link">Upwork</a>.{' '}
             </p>
 
             <p>
@@ -201,7 +153,7 @@ const About = () => {
             <a
               href="/resume.pdf"
               aria-label="External Link"
-              className="subtitle"
+              className="subtitle inline-link"
               target="_blank"
               rel="noopener noreferrer">
               My resume

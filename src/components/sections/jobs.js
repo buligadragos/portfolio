@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { srConfig } from '@config';
 import { KEY_CODES } from '@utils';
 import sr from '@utils/sr';
-import { mixins } from '@styles';
 
 const StyledJobsSection = styled.section`
   max-width: 700px;
@@ -62,7 +61,10 @@ const StyledTabList = styled.div`
 `;
 
 const StyledTabButton = styled.button`
-  ${mixins.link};
+  position: relative;
+  transition: var(--transition);
+  cursor: pointer;
+  text-decoration: none;
   display: flex;
   align-items: center;
   width: 100%;
@@ -79,16 +81,21 @@ const StyledTabButton = styled.button`
     padding: 0 15px 2px;
   }
   @media (max-width: 600px) {
-    ${mixins.flexCenter};
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 120px;
     padding: 0 15px;
     border-left: 0;
-    border-bottom: 2px solid var(--hoverbg);
+    border-bottom: 2px solid var(--grey);
     text-align: center;
   }
   &:hover,
+  &:active,
   &:focus {
     background-color: var(--hoverbg);
+    color: var(--accent);
+    outline: 0;
   }
 `;
 
@@ -132,7 +139,21 @@ const StyledTabPanel = styled.div`
   height: auto;
   padding: 10px 5px;
   ul {
-    ${mixins.fancyList};
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-size: var(--fz-lg);
+    li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 10px;
+      &:before {
+        content: '▹';
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+      }
+    }
   }
   h3 {
     margin-bottom: 2px;
@@ -148,9 +169,6 @@ const StyledTabPanel = styled.div`
     color: var(--grey);
     font-family: var(--font-mono);
     font-size: var(--fz-xs);
-  }
-  a.inline-link {
-    ${mixins.inlineLink};
   }
 `;
 
