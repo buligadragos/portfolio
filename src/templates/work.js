@@ -495,11 +495,8 @@ const WorkTemplate = ({ data, pageContext }) => {
           </SectionOneImageTwo>
         </SectionOne>
 
-        <Parallax strength={200}>
-          <Background>
-            <GatsbyImage image={parrlaximg} alt={title} className="img-par" />
-          </Background>
-        </Parallax>
+
+        <GatsbyImage image={parrlaximg} alt={title} className="img-par" />
 
         <SectionNavigate>
           <Line className="line" />
