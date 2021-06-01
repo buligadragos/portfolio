@@ -5,6 +5,7 @@
  */
 
 const path = require('path');
+
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
@@ -65,6 +66,10 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
           },
           {
             test: /animejs/,
+            use: loaders.null(),
+          },
+          {
+            test: /miniraf/,
             use: loaders.null(),
           },
         ],

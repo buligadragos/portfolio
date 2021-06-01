@@ -2,15 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { Icon } from '@components/icons';
 import { socialMedia } from '@config';
-import { mixins } from '@styles';
 
 const StyledFooter = styled.footer`
-  ${mixins.flexCenter};
+  display: flex;
   flex-direction: column;
   height: auto;
   min-height: 70px;
   padding: 15px;
   text-align: center;
+  justify-content: center;
 `;
 
 const StyledSocialLinks = styled.div`
@@ -25,13 +25,16 @@ const StyledSocialLinks = styled.div`
   }
 
   ul {
-    ${mixins.flexBetween};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 0;
     margin: 0;
     list-style: none;
 
     a {
       padding: 10px;
+
       svg {
         width: 20px;
         height: 20px;
@@ -45,7 +48,6 @@ const StyledCredit = styled.div`
   font-family: var(--font-mono);
   font-size: var(--fz-xxs);
   line-height: 1;
-
   a {
     padding: 10px;
   }

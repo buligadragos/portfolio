@@ -226,8 +226,7 @@ const Nav = ({ isFirstMount }) => {
           temperature: main.temp,
           city: name,
         });
-      })
-      .catch(e => console.error(e));
+      });
   }, [lat, long]);
 
   // Ora

@@ -1,11 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
-import Img from 'gatsby-image';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import sr from '@utils/sr';
 import { srConfig } from '@config';
 import { Icon, IconArchive } from '@components/icons';
-import { mixins } from '@styles';
 
 const Icons = styled.span`
   position: relative;
@@ -31,7 +30,9 @@ const Icons = styled.span`
 `;
 
 const StyledProjectsGrid = styled.ul`
-  ${mixins.resetList};
+  list-style: none;
+  padding: 0;
+  margin: 0;
 
   a {
     position: relative;
@@ -96,7 +97,9 @@ const StyledProject = styled.li`
     color: var(--headline);
 
     a {
-      ${mixins.flexCenter};
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: 0 0 0 20px;
 
       &.external {
@@ -248,27 +251,11 @@ const StyledArchiveLink = styled.div`
       bottom: 0.1em;
     }
   }
-
-  .archive-butt {
-    ${mixins.svgButton};
-  }
-
-  .archive-hid {
-    transform: translate3d(0, 240%, 0);
-  }
-
-  a:hover .icons .archive-visi {
-    transform: translate3d(0, -240%, 0);
-  }
-
-  a:hover .icons .archive-hid {
-    transform: translate3d(0, 0, 0);
-  }
 `;
 
 const Featured = () => {
   const data = useStaticQuery(graphql`
-    query {
+  {
       featured: allMarkdownRemark(
         filter: { fileAbsolutePath: { regex: "/works/" } }
         sort: { fields: [frontmatter___date], order: DESC }
@@ -279,16 +266,12 @@ const Featured = () => {
               title
               coverlg {
                 childImageSharp {
-                  fluid(maxWidth: 10000) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
+                  gatsbyImageData(width: 1000, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
                 }
               }
               coversm {
                 childImageSharp {
-                  fluid(maxWidth: 10000) {
-                    ...GatsbyImageSharpFluid_withWebp
-                  }
+                  gatsbyImageData(width: 1000, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
                 }
               }
               tech
@@ -324,6 +307,8 @@ const Featured = () => {
           featuredProjects.map(({ node }, i) => {
             const { frontmatter } = node;
             const { title, coverlg, coversm, slug, tech, github, external } = frontmatter;
+            const coverdesktop = getImage(coverlg);
+            const covermobile = getImage(coversm);
 
             return (
               <StyledProject key={i} ref={el => (revealProjects.current[i] = el)}>
@@ -331,11 +316,11 @@ const Featured = () => {
                   <Link to={slug} className="prew">
                     <StyledProjectPreview>
                       <El1>
-                        <Img fluid={coverlg.childImageSharp.fluid} alt={title} className="img" />
+                        <GatsbyImage image={coverdesktop} alt={title} className="img" />
                         <span className="hovr" />
                       </El1>
                       <El2>
-                        <Img fluid={coversm.childImageSharp.fluid} alt={title} className="img" />
+                        <GatsbyImage image={covermobile} alt={title} className="img" />
                         <span className="hovl" />
                       </El2>
                     </StyledProjectPreview>
@@ -376,11 +361,11 @@ const Featured = () => {
           })}
 
         <StyledArchiveLink>
-          <Link className="archive-butt" to="/works" ref={revealArchiveLink}>
+          <Link className="svgbutton" to="/works" ref={revealArchiveLink}>
             View the archive
             <Icons className="icons">
-              <IconArchive className="archive-visi" />
-              <IconArchive className="archive-hid" />
+              <IconArchive className="svgicon-vis" />
+              <IconArchive className="svgicon-hide" />
             </Icons>
           </Link>
         </StyledArchiveLink>

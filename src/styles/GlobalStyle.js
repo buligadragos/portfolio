@@ -258,9 +258,40 @@ const GlobalStyle = createGlobalStyle`
       color: var(--accent);
     }
     &.inline-link {
+      transition: var(--transition);
+      color: var(--accent);
+      :hover,
+      :focus,
+      :active {
+        color: var(--accent);
+        outline: 0;
+
+        :after {
+          width: 100%;
+        }
+      }
+      :after {
+        content: '';
+        display: block;
+        width: 0;
+        height: 1px;
+        position: relative;
+        bottom: 0.37em;
+        background-color: var(--accent);
+        transition: var(--transition);
+        opacity: 0.5;
+      }
+      svg {
+        width: 1em;
+        height: 1em;
+        bottom: 8px;
+        position: absolute;
+        margin-left: 0.4vw;
+      }
     }
+
     &[target='_blank'] {
-      cursor: ne-resize;
+      cursor: pointer;
     }
   }
 
@@ -339,12 +370,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: var(--font-sans);
     font-weight: 400;
     line-height: 1.5;
-    @media (max-width: 1080px) {
-      font-size: var(--fz-sm);
-    }
-    @media (max-width: 768px) {
-      font-size: var(--fz-xs);
-    }
 
     a {
       line-height: 1.5;
@@ -353,6 +378,59 @@ const GlobalStyle = createGlobalStyle`
 
   .gatsby-image-outer-wrapper {
     height: 100%;
+  }
+
+  .svgbutton{
+    color: var(--grey);
+    background-color: transparent;
+    border: 1px solid var(--grey);
+    border-radius: var(--border-radius);
+    font-size: var(--fz-lg);
+    font-family: var(--font-sans);
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 550px) {
+      font-size: var(--fz-md);
+    }
+    svg line {
+      stroke-width: 50;
+      stroke: var(--grey);
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      outline: none;
+    }
+    &:after {
+      display: none !important;
+    }
+  }
+  .svgicon-hide {
+    transform: translate3d(0, 240%, 0);
+  }
+
+  a:hover .icons .svgicon-vis {
+    transform: translate3d(0, -240%, 0);
+  }
+
+  a:hover .icons .svgicon-hide {
+    transform: translate3d(0, 0, 0);
   }
 
 

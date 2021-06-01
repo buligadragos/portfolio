@@ -6,10 +6,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { navDelay } from '@utils';
 import { IconHome } from '../components/icons';
-import { mixins } from '@styles';
 
 const StyledMainContainer = styled.main`
-  ${mixins.flexCenter};
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 `;
 const StyledTitle = styled.h1`
@@ -27,25 +28,6 @@ const StyledArchiveLink = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 80px auto 0;
-  .archive-link {
-    font-family: var(--font-sans);
-    font-size: var(--fz-xl);
-    &:after {
-      bottom: 0.1em;
-    }
-  }
-  .home-butt {
-    ${mixins.svgButton};
-  }
-  .home-hid {
-    transform: translate3d(0, 240%, 0);
-  }
-  a:hover .icons .home-visi {
-    transform: translate3d(0, -240%, 0);
-  }
-  a:hover .icons .home-hid {
-    transform: translate3d(0, 0, 0);
-  }
 `;
 const Icons = styled.span`
   position: relative;
@@ -88,11 +70,11 @@ const NotFoundPage = () => {
               <StyledTitle>404</StyledTitle>
               <StyledSubtitle>Page Not Found</StyledSubtitle>
               <StyledArchiveLink ref={revealButton}>
-                <Link className="home-butt" to="/">
+                <Link className="svgbutton" to="/">
                   Back to home
                   <Icons className="icons">
-                    <IconHome className="home-visi" />
-                    <IconHome className="home-hid" />
+                    <IconHome className="svgicon-vis" />
+                    <IconHome className="svgicon-hide" />
                   </Icons>
                 </Link>
               </StyledArchiveLink>

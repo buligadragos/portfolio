@@ -4,7 +4,7 @@ import codeSVG from '../images/map.svg';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-if (process.browser) {
+if (typeof window !== 'undefined') {
   require('pathseg');
 }
 

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
 import { navDelay, loaderDelay } from '@utils';
-import { mixins } from '@styles';
 
 const StyledHeroSection = styled.section`
-  ${mixins.flexCenter};
+  display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: flex-start;
   min-height: 100vh;
@@ -38,11 +38,6 @@ const StyledHeroSection = styled.section`
     margin: 20px 0 0;
     max-width: 500px;
     color: var(--grey);
-  }
-
-  .email-link {
-    ${mixins.bigButton};
-    margin-top: 50px;
   }
 `;
 

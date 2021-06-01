@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { srConfig } from '@config';
 import sr from '@utils/sr';
 import { Icon } from '@components/icons';
-import { mixins } from '@styles';
 
 const StyledContactSection = styled.section`
   max-width: 600px;
@@ -112,11 +111,6 @@ const StyledContactSection = styled.section`
 
   .title {
     font-size: clamp(40px, 5vw, 60px);
-  }
-
-  .email-link {
-    ${mixins.bigButton};
-    margin-top: 50px;
   }
 `;
 

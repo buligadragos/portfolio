@@ -1,12 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
+import { StaticImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import { srConfig } from '@config';
 import sr from '@utils/sr';
 import Tilt from 'react-parallax-tilt';
 import { Icon } from '@components/icons';
-import { mixins } from '@styles';
+
 
 const StyledAboutSection = styled.section`
   max-width: 900px;
@@ -48,58 +47,11 @@ const StyledText = styled.div`
     }
   }
 
-  a {
-    display: inline-block;
-    flex-direction: row;
-    align-items: flex-start;
-    cursor: pointer;
-    font-family: var(--font-sans);
-  }
-
-  a:hover {
-    color: var(--accent);
-    outline: 0;
-
-    &:after {
-      width: 100%;
-    }
-
-    & > * {
-      color: var(--accent) !important;
-      transition: var(--transition);
-    }
-  }
-
-  a:after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 1px;
-    position: relative;
-    bottom: 0.37em;
-    background-color: var(--accent);
-    transition: var(--transition);
-    opacity: 0.5;
-  }
-
-  svg {
-    width: 1em;
-    height: 1em;
-    bottom: 8px;
-    position: absolute;
-    margin-left: 0.4vw;
-  }
-
-  p {
-    & > a {
-      ${mixins.inlineLink};
-    }
-  }
-
   .subtitle {
     cursor: context-menu;
   }
 `;
+
 const StyledPic = styled.div`
   position: relative;
   max-width: 300px;
@@ -118,10 +70,6 @@ const StyledPic = styled.div`
     &:focus {
       background: transparent;
       outline: 0;
-      &:after {
-        top: 15px;
-        left: 15px;
-      }
       .img {
         filter: none;
         mix-blend-mode: normal;
@@ -129,49 +77,39 @@ const StyledPic = styled.div`
     }
 
   .img {
-    position: relative;
-    border-radius: var(--border-radius);
     mix-blend-mode: multiply;
     filter: grayscale(100%) contrast(1);
     transition: var(--transition);
   }
-
-
-
 `;
 
 const About = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      avatar: file(sourceInstanceName: { eq: "images" }, relativePath: { eq: "me.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 500, traceSVG: { color: "#64ffda" }) {
-            ...GatsbyImageSharpFluid_withWebp_tracedSVG
-          }
-        }
-      }
-    }
-  `);
-
   const revealContainer = useRef(null);
 
   useEffect(() => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = ['JavaScript (ES6+)', 'React', 'WordPress'];
-
   const TiltImg = () => (
     <Tilt
-      tiltMaxAngleX={30}
-      tiltMaxAngleY={30}
+      className="parallax-effect"
       perspective={1300}
-      transitionSpeed={1500}
-      scale={1.1}
-      gyroscope={true}>
-      <Img fluid={data.avatar.childImageSharp.fluid} alt="Avatar" className="img" />
+      glareEnable={true}
+      transitionSpeed={5500}
+      glareMaxOpacity={0.25}
+      scale={1.15}
+    >
+      <StaticImage
+        className="img"
+        src="../../images/me.jpg"
+        width={500}
+        quality={95}
+        formats={['AUTO', 'WEBP', 'AVIF']}
+        alt="Avatar"
+      />
     </Tilt>
   );
+
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -190,9 +128,9 @@ const About = () => {
             <p>
               Fast-forward to today, I’m now focusing on web apps and data analysis, am currently
               pursuing my Master of Science in E-Business at{' '}
-              <a href="https://www.ubbcluj.ro/en/">Babes-Bolyai University</a>, and working as a
+              <a href="https://www.ubbcluj.ro/en/" className="inline-link">Babes-Bolyai University</a>, and working as a
               freelancer on{' '}
-              <a href="https://www.upwork.com/freelancers/~0187fc4de875739745">Upwork</a>.{' '}
+              <a href="https://www.upwork.com/freelancers/~0187fc4de875739745" className="inline-link">Upwork</a>.{' '}
             </p>
 
             <p>
@@ -203,7 +141,7 @@ const About = () => {
             <a
               href="/resume.pdf"
               aria-label="External Link"
-              className="subtitle"
+              className="subtitle inline-link"
               target="_blank"
               rel="noopener noreferrer">
               My resume
@@ -214,7 +152,9 @@ const About = () => {
           </div>
 
           <ul className="skills-list">
-            {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
+            <li>JavaScript (ES6+)</li>
+            <li>React</li>
+            <li>WordPress</li>
           </ul>
         </StyledText>
 
