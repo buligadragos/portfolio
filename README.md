@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="Logo" src="https://raw.githubusercontent.com/buligadragos/portfolio/main/src/images/favicon.png" width="200" />
+  <img alt="Logo" src="https://raw.githubusercontent.com/buligadragos/portfolio/master/src/images/favicon.png" width="200" />
 </div>
 <h1 align="center">
   Folio 21'
@@ -19,7 +19,9 @@
 </p>
 
 <p align="center">
-<a href="https://www.codacy.com/gh/buligadragos/portfolio/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=buligadragos/portfolio&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/39b01ddab5794a2d83c774f1e9d3a92f"/></a>    <a href="https://www.codefactor.io/repository/github/buligadragos/portfolio"><img src="https://www.codefactor.io/repository/github/buligadragos/portfolio/badge" alt="CodeFactor" /></a>
+<a href="https://www.codacy.com/gh/buligadragos/portfolio/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=buligadragos/portfolio&amp;utm_campaign=Badge_Grade">
+<img src="https://app.codacy.com/project/badge/Grade/39b01ddab5794a2d83c774f1e9d3a92f"/></a>    <a href="https://www.codefactor.io/repository/github/buligadragos/portfolio"><img src="https://www.codefactor.io/repository/github/buligadragos/portfolio/badge" alt="CodeFactor" /></a>
+<a href="https://lgtm.com/projects/g/buligadragos/portfolio/alerts/"><img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/buligadragos/portfolio.svg?logo=lgtm&logoWidth=18"/></a>
 </p>
 <p align="center">
     <img src="https://therealsujitk-vercel-badge.vercel.app/?app=portfolio-buligadragos&style=flat-square" />
@@ -27,7 +29,7 @@
 </p>
 
 
-![demo](https://github.com/buligadragos/portfolio/blob/main/static/og.png?raw=true)
+![demo](https://github.com/buligadragos/portfolio/blob/master/static/og.png?raw=true)
 
 ## 🛠 Installation & Set Up
 
