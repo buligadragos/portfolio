@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.1 (2021-06-05)
+
+* Update readme and some clean | [74f1a59](https://github.com/buligadragos/portfolio/commit/74f1a5906ddc3e0da0eb0b8bb26647f8153cfce8)
+* Update resume | [183255c](https://github.com/buligadragos/portfolio/commit/183255cdf017d761c4729549baa1bdbce85250de)
+
+[compare](https://github.com/buligadragos/portfolio/compare/1.1.0...1.1.1)
+
 ## 1.1.0 (2021-06-01)
 
 * added GitHub Actions for bump & release | [2a18913](https://github.com/buligadragos/portfolio/commit/2a1891301eb5efc687e059405ea636842b377725)
