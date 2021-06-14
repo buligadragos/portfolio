@@ -1,25 +1,30 @@
-//thanks to QoP from SO
 import { useState, useEffect } from 'react';
-
-function getWindowDimensions() {
-  const { innerWidth: width, innerHeight: height } = window;
-  return {
-    width,
-    height,
-  };
-}
+const _ = require('lodash');
 
 export default function useWindowDimensions() {
+
+  const hasWindow = typeof window !== 'undefined';
+
+  function getWindowDimensions() {
+    const width = hasWindow ? window.innerWidth : null;
+    const height = hasWindow ? window.innerHeight : null;
+    return {
+      width,
+      height,
+    };
+  }
+
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
 
   useEffect(() => {
-    function handleResize() {
+    const handleResize = _.debounce(() => {
       setWindowDimensions(getWindowDimensions());
-    }
+    }, 300);
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [hasWindow]);
 
   return windowDimensions;
+
 }
