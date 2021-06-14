@@ -13,6 +13,7 @@ const StyledParticleContainer = styled.div`
     height: 100%;
     position: absolute;
     width: 100%;
+    max-height: 100vh;
     left: 0;
   }
 `;
