@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.2 (2021-06-14)
+
+* Fixed hero map | [63f75d6](https://github.com/buligadragos/portfolio/commit/63f75d6659091758b83837cc31fecc493f3ca39b)
+* Fixed map and browserlist | [32c346d](https://github.com/buligadragos/portfolio/commit/32c346d7178d2942ad5c24fb45a92324580916a9)
+
+[compare](https://github.com/buligadragos/portfolio/compare/1.1.1...1.1.2)
+
 ## 1.1.1 (2021-06-05)
 
 * Update readme and some clean | [74f1a59](https://github.com/buligadragos/portfolio/commit/74f1a5906ddc3e0da0eb0b8bb26647f8153cfce8)
