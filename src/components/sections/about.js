@@ -6,7 +6,6 @@ import sr from '@utils/sr';
 import Tilt from 'react-parallax-tilt';
 import { Icon } from '@components/icons';
 
-
 const StyledAboutSection = styled.section`
   max-width: 900px;
 
@@ -46,10 +45,6 @@ const StyledText = styled.div`
       }
     }
   }
-
-  .subtitle {
-    cursor: context-menu;
-  }
 `;
 
 const StyledPic = styled.div`
@@ -75,6 +70,7 @@ const StyledPic = styled.div`
         mix-blend-mode: normal;
       }
     }
+  }
 
   .img {
     mix-blend-mode: multiply;
@@ -97,8 +93,7 @@ const About = () => {
       glareEnable={true}
       transitionSpeed={5500}
       glareMaxOpacity={0.25}
-      scale={1.15}
-    >
+      scale={1.15}>
       <StaticImage
         className="img"
         src="../../images/me.jpg"
@@ -109,7 +104,6 @@ const About = () => {
       />
     </Tilt>
   );
-
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -128,15 +122,24 @@ const About = () => {
             <p>
               Fast-forward to today, I’m now focusing on web apps and data analysis, am currently
               pursuing my Master of Science in E-Business at{' '}
-              <a href="https://www.ubbcluj.ro/en/" className="inline-link">Babes-Bolyai University</a>, and working as a
-              freelancer on{' '}
-              <a href="https://www.upwork.com/freelancers/~0187fc4de875739745" className="inline-link">Upwork</a>.{' '}
+              <a href="https://www.ubbcluj.ro/en/" className="inline-link">
+                Babes-Bolyai University
+              </a>
+              , and working as a freelancer on{' '}
+              <a
+                href="https://www.upwork.com/freelancers/~0187fc4de875739745"
+                className="inline-link">
+                Upwork
+              </a>
+              .{' '}
             </p>
 
             <p>
               You can read more about my experience, skills, education, and much more in the PDF
               attached below:
             </p>
+
+            <p></p>
 
             <a
               href="/resume.pdf"

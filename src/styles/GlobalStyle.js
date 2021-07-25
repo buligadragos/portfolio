@@ -258,29 +258,47 @@ const GlobalStyle = createGlobalStyle`
       color: var(--accent);
     }
     &.inline-link {
-      transition: var(--transition);
       color: var(--accent);
-      :hover,
-      :focus,
-      :active {
-        color: var(--accent);
-        outline: 0;
-
-        :after {
-          width: 100%;
-        }
-      }
+      cursor: pointer;
+      :before,
       :after {
-        content: '';
-        display: block;
-        width: 0;
-        height: 1px;
-        position: relative;
-        bottom: 0.37em;
-        background-color: var(--accent);
-        transition: var(--transition);
-        opacity: 0.5;
+       position: absolute;
+       width: 100%;
+       height: 1px;
+       background: currentColor;
+       top: 90%;
+       left: 0;
+       pointer-events: none;
       }
+
+      :before {
+       content: '';
+       transform-origin: 100% 50%;
+       transform: scale3d(0, 1, 1);
+       transition: transform 0.5s cubic-bezier(0.7, 0, 0.2, 1);
+      }
+
+      :hover::before {
+      transform-origin: 0% 50%;
+      transform: scale3d(1, 1, 1);
+      transition-timing-function: cubic-bezier(0.4, 1, 0.8, 1);
+      }
+
+      :after {
+       content: '';
+       top: calc(90% + 3px);
+       transform-origin: 0% 50%;
+       transform: scale3d(0, 1, 1);
+       transition: transform 0.5s cubic-bezier(0.7, 0, 0.2, 1);
+      }
+
+      :hover::after {
+       transform-origin: 100% 50%;
+       transform: scale3d(1, 1, 1);
+       transition-timing-function: cubic-bezier(0.4, 1, 0.8, 1);
+      }
+
+
       svg {
         width: 1em;
         height: 1em;
