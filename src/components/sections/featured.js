@@ -255,7 +255,7 @@ const StyledArchiveLink = styled.div`
 
 const Featured = () => {
   const data = useStaticQuery(graphql`
-  {
+    {
       featured: allMarkdownRemark(
         filter: { fileAbsolutePath: { regex: "/works/" } }
         sort: { fields: [frontmatter___date], order: DESC }
@@ -328,9 +328,7 @@ const Featured = () => {
 
                   <div className="project-details">
                     <div className="left-side">
-                      <h3 className="project-title">
-                        <Link to={slug}>{title}</Link>
-                      </h3>
+                      <h3 className="project-title">{title}</h3>
                       {tech.length && (
                         <ul className="project-tech-list">
                           {tech.map((tech, i) => (

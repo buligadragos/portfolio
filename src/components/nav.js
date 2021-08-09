@@ -36,6 +36,7 @@ const RightWrapper = styled.div`
   flex-direction: column;
   width: auto;
   height: auto;
+  font-family: var(--font-mono);
   line-height: normal;
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -74,6 +75,7 @@ const LeftWrapper = styled.div`
   flex-direction: column;
   width: auto;
   height: auto;
+  font-family: var(--font-mono);
   color: var(--headline);
   line-height: normal;
   font-size: 0.8rem;

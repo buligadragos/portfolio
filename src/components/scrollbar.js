@@ -16,9 +16,9 @@ const Trackline = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  height: calc(88vh - 40px);
+  height: 164px;
   max-height: 425px;
-  width: 1px;
+  width: 2px;
   background-color: var(--grey);
   opacity: 0.6;
   overflow: hidden;
@@ -29,7 +29,7 @@ const ProgressLine = styled.div`
   position: absolute;
   height: 100%;
   top: -100%;
-  width: 1px;
+  width: 2px;
   background-color: var(--accent);
   left: 0;
 `;

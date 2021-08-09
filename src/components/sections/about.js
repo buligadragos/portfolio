@@ -33,7 +33,7 @@ const StyledText = styled.div`
       margin-bottom: 10px;
       padding-left: 20px;
       font-family: var(--font-mono);
-      font-size: var(--fz-sm);
+      font-size: var(--fz-xs);
 
       &:before {
         content: '▹';

@@ -5,13 +5,12 @@ import styled from 'styled-components';
 import { loaderDelay } from '@utils';
 
 const StyledSideElement = styled.div`
-  width: 40px;
   position: fixed;
-  transform: ${props => (props.orientation === 'right' ? 'translateY(-50%)' : 'inherit')};
-  top: ${props => (props.orientation === 'right' ? '50%' : 'inherit')};
-  bottom: ${props => (props.orientation === 'right' ? 'inherit' : '0px')};
-  left: ${props => (props.orientation === 'left' ? '40px' : 'auto')};
-  right: ${props => (props.orientation === 'left' ? 'auto' : '0px')};
+  transform: translate(0, -50%);
+  top: 50%;
+  bottom: ${props => (props.orientation === 'right' ? 'inherit' : 'inherit')};
+  left: ${props => (props.orientation === 'left' ? '20px' : 'auto')};
+  right: ${props => (props.orientation === 'left' ? 'auto' : '40px')};
   z-index: 10;
   color: var(--grey);
 

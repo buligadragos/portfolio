@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
 
   :root {
     --font-sans: 'Josefin Sans', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
-    --font-mono: 'Lato', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+    --font-mono: 'Silka', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
 
     --fz-xxs: 12px;
     --fz-xs: 13px;

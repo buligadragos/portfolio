@@ -142,7 +142,7 @@ const StyledTabPanel = styled.div`
     padding: 0;
     margin: 0;
     list-style: none;
-    font-size: var(--fz-lg);
+    font-size: 1rem;
     li {
       position: relative;
       padding-left: 30px;
