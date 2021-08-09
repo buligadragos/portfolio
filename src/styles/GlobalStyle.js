@@ -71,7 +71,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: var(--body);
     color: var(--text);
     font-family: var(--font-sans);
-    font-size: var(--fz-lg);
+    font-size: 1rem;
     line-height: 1.3;
     transition: all 340ms ease-out 0s;
 
@@ -275,29 +275,13 @@ const GlobalStyle = createGlobalStyle`
        content: '';
        transform-origin: 100% 50%;
        transform: scale3d(0, 1, 1);
-       transition: transform 0.5s cubic-bezier(0.7, 0, 0.2, 1);
+       transition: transform 0.3s;
       }
 
       :hover::before {
       transform-origin: 0% 50%;
       transform: scale3d(1, 1, 1);
-      transition-timing-function: cubic-bezier(0.4, 1, 0.8, 1);
       }
-
-      :after {
-       content: '';
-       top: calc(90% + 3px);
-       transform-origin: 0% 50%;
-       transform: scale3d(0, 1, 1);
-       transition: transform 0.5s cubic-bezier(0.7, 0, 0.2, 1);
-      }
-
-      :hover::after {
-       transform-origin: 100% 50%;
-       transform: scale3d(1, 1, 1);
-       transition-timing-function: cubic-bezier(0.4, 1, 0.8, 1);
-      }
-
 
       svg {
         width: 1em;

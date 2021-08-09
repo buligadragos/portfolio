@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { loaderDelay } from '@utils';
 import { useScrollDirection } from '@hooks';
 import { IconLogo } from '@components/icons';
@@ -15,37 +15,6 @@ const StyledHeader = styled.header`
   align-items: center;
   width: 100vw;
   height: 4rem;
-
-  ${props =>
-    props.scrollDirection === 'up' &&
-    !props.scrolledToTop &&
-    css`
-      .logo-vis {
-        transform: translateX(0px) !important;
-      }
-    `};
-
-  ${props =>
-    props.scrollDirection === 'down' &&
-    !props.scrolledToTop &&
-    css`
-      .logo-fill {
-        fill: transparent !important;
-        transform: translateX(85px) !important;
-      }
-
-      .logo-vis {
-        fill: var(--headline);
-      }
-
-      #logo-dot {
-        transform: translateX(-310px) !important;
-      }
-
-      #logo-b {
-        transform: translateX(310px) !important;
-      }
-    `};
 `;
 
 const StyledLogo = styled.div`
@@ -54,19 +23,10 @@ const StyledLogo = styled.div`
   transform: translateX(-50%);
 
   svg {
-    fill: white;
+    fill: var(--headline);
     transition: var(--transition);
     width: 170px;
     height: 42px;
-  }
-  .logo-fill {
-    fill: var(--headline);
-    transition: all 0.3s;
-  }
-
-  .logo-vis {
-    fill: var(--headline);
-    transition: all 0.3s;
   }
 `;
 
@@ -216,9 +176,7 @@ const Nav = ({ isFirstMount }) => {
     if (process.env.NODE_ENV !== 'production') {
       return;
     }
-    fetch(
-      `${API_URL}weather?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`,
-    )
+    fetch(`${API_URL}weather?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`)
       .then(response => response.json())
       .then(json => {
         const { main, name } = json;

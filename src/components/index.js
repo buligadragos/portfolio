@@ -11,7 +11,6 @@ export { default as About } from './sections/about';
 export { default as Jobs } from './sections/jobs';
 export { default as Featured } from './sections/featured';
 export { default as Contact } from './sections/contact';
-export { default as HeroMap } from './heroMap';
 export { ThemeProvider, ThemeContext } from './ThemeContext';
 export { default as Toggle } from './toggle';
 export { default as ScrollAnimation } from './scrollAnimation';

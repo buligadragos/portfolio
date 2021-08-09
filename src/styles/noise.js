@@ -1,6 +1,6 @@
 import { keyframes, css } from 'styled-components';
 
-import GrainImage from '../images/noise.jpg';
+import GrainImage from '../images/wrap.png';
 
 const Grain = keyframes`
   0%, 100% { transform:translate(0, 0); }
@@ -23,7 +23,7 @@ const Noise = css`
     content: '';
     height: 300%;
     left: -50%;
-    opacity: 0.06;
+    opacity: 1;
     position: fixed;
     top: -110%;
     width: 300%;

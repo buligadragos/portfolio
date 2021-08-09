@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Hero, About, Jobs, Featured, Contact, HeroMap } from '@components';
+import { Hero, About, Jobs, Featured, Contact } from '@components';
 
 const StyledMainContainer = styled.main`
   counter-reset: section;
@@ -9,7 +9,6 @@ const StyledMainContainer = styled.main`
 const IndexPage = () => (
   <>
     <StyledMainContainer className="fillHeight">
-      <HeroMap />
       <Hero />
       <About />
       <Jobs />
