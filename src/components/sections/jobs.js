@@ -152,6 +152,8 @@ const StyledTabPanel = styled.div`
         position: absolute;
         left: 0;
         color: var(--accent);
+        line-height: 25px;
+        font-size: var(--fz-xxl);
       }
     }
   }

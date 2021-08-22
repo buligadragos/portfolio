@@ -1,7 +1,7 @@
 export const COLORS = {
   body: {
-    light: '#f5efe1',
-    dark: '#111216',
+    light: '#eee',
+    dark: '#161616',
   },
   headline: {
     light: '#111216',

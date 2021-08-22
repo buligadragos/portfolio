@@ -1,13 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Icon } from '@components/icons';
 import { socialMedia } from '@config';
-
-const StyledFooter = styled.footer`
-  position: relative;
-  font-family: var(--font-mono);
-  font-size: var(--fz-xs);
-`;
+import DotUpTime from '../components/icons/uptime';
+import IconGlobe from './icons/globe';
 
 const StyledSocialLinks = styled.div`
   display: none;
@@ -39,10 +35,14 @@ const StyledSocialLinks = styled.div`
   }
 `;
 
-const StyledCredit = styled.div`
+const StyledFooter = styled.footer`
   max-width: 1150px;
   padding: 0px 1rem;
   margin: 0px auto;
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: var(--fz-xs);
+  color: var(--headline);
   .middle {
   }
 
@@ -53,7 +53,7 @@ const StyledCredit = styled.div`
   }
 `;
 
-const StyledFooterContent = styled.footer`
+const StyledFooterContent = styled.div`
   padding: 2rem 0.5rem;
   display: flex;
   -moz-box-align: center;
@@ -68,7 +68,7 @@ const StyledFooterContent = styled.footer`
     .middle {
       margin-top: 10px;
     }
-    .site-info {
+    .site-status {
       margin-top: 10px;
     }
   }
@@ -78,6 +78,12 @@ const StyledFooterContent = styled.footer`
     justify-content: flex-start;
     flex-grow: 1;
     flex-basis: 25%;
+    align-items: center;
+
+    svg {
+      width: 1em;
+      height: 1em;
+    }
   }
 
   .middle {
@@ -85,123 +91,91 @@ const StyledFooterContent = styled.footer`
     justify-content: center;
   }
 
-  .site-info {
+  .site-status {
     text-align: right;
     justify-content: flex-end;
     flex-grow: 1;
     flex-basis: 25%;
     position: relative;
-  }
-
-  .info-btn {
     cursor: pointer;
   }
 
-  .info-btn:hover {
+  .site-status:hover {
     color: var(--accent);
     transition: color 0.4s;
   }
 
-  .info {
-    background-color: var(--loaderbg);
-    border: 1px solid var(--grey);
-    bottom: calc(100% + 10px);
-    left: calc(100% + 20px);
-    opacity: 0;
-    padding: 20px 30px;
-    transition: 0.3s ease-out;
-    visibility: hidden;
-    width: 240px;
-    text-align: center;
-
-    h5 {
-      color: var(--headline);
-      font-size: var(--fz-xs);
-      font-family: var(--font-mono);
-      font-weight: 400;
-      margin: 0 0 0 0;
-    }
+  .uptime {
+    width: 8px;
+    height: 8px;
   }
 
-  .inner-info {
-    position: relative;
-    display: inline;
-  }
-
-  .inner-info:hover .info {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .info,
-  .info:before {
-    position: absolute;
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%);
-  }
-
-  .info:before {
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 8px solid var(--grey);
-    bottom: -8px;
-    content: '';
-    height: 0;
-    left: calc(100% - 25px);
-    width: 0;
-  }
-
-  @media (max-width: 768px) {
-    .info,
-    .info:before {
-      left: 50%;
-      -webkit-transform: translateX(-50%);
-      transform: translateX(-50%);
-    }
-  }
-
-  .tool {
-    align-items: center;
-    display: flex;
-    margin-top: 15px;
-    text-align: left;
-  }
-
-  .img {
-    align-items: center;
-    background-color: var(--shadow);
-    border-radius: 100px;
-    display: flex;
-    height: 40px;
-    justify-content: center;
-    margin-right: 10px;
-    width: 40px;
-  }
-
-  .img img {
-    height: 24px;
-    -o-object-fit: contain;
-    object-fit: contain;
-    width: 24px;
-  }
-
-  .tag {
-    display: inline-block;
-    font-size: var(--fz-xs);
-    font-weight: 400;
-    opacity: 0.6;
+  .status-btn {
+    margin-left: 8px;
   }
 `;
 
-const Footer = () => (
-  <StyledFooter>
-    <StyledCredit>
+const StyledClock = styled.time`
+  .separator {
+    animation: blinker 2s linear infinite;
+  }
+
+  .icon.baseline svg {
+    top: 0.2em;
+    position: relative;
+  }
+  .icon {
+    display: inline-flex;
+    align-self: center;
+  }
+
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+`;
+
+const Footer = () => {
+  const serverTime = 'Europe/Bucharest';
+  const [today, setDate] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDate(new Date());
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  const time = today.toLocaleTimeString('en-US', {
+    timeZone: serverTime,
+    hour: 'numeric',
+    hour12: false,
+    minute: 'numeric',
+  });
+
+  const HHMM = time.split(':');
+  const hour = HHMM[0];
+  const minutes = HHMM[1];
+
+  return (
+    <StyledFooter>
       <StyledFooterContent>
         <div className="copyright">
-          <span>Portfolio 2021</span>
+          <StyledClock>
+            <div className="icon baseline">
+              <IconGlobe />
+            </div>{' '}
+            <span className="time-location">Romania</span> <span>[{hour}</span>
+            <span className="separator">:</span>
+            <span>{minutes}]</span>
+          </StyledClock>
         </div>
+
         <div className="middle">
-          <span>Copyright © 2021 buligadragos. All rights reserved</span>
+          <span>© 2021 Buliga Dragos. All rights reserved</span>
         </div>
         <StyledSocialLinks>
           <ul>
@@ -215,64 +189,13 @@ const Footer = () => (
               ))}
           </ul>
         </StyledSocialLinks>
-        <div className="site-info">
-          <div className="inner-info">
-            <span className="info-btn">Info</span>
-            <div className="info">
-              <h4>Crafted with ❤ using</h4>
-              <div className="all-tools">
-                <div className="tool xd">
-                  <div className="img">
-                    <img src={`xd.png`} alt="Adobe XD"></img>
-                  </div>
-                  <div className="content">
-                    <h5 className="tag-title">Adobe XD</h5>
-                    <span className="tag">Design tool</span>
-                  </div>
-                </div>
-                <div className="tool gatsby">
-                  <div className="img">
-                    <img src={`gatsby.png`} alt="Gatsbyjs (React)"></img>
-                  </div>
-                  <div className="content">
-                    <h5 className="tag-title">Gatsbyjs (React)</h5>
-                    <span className="tag">Frontend</span>
-                  </div>
-                </div>
-                <div className="tool gsap">
-                  <div className="img">
-                    <img src={`gsap.png`} alt="GSAP"></img>
-                  </div>
-                  <div className="content">
-                    <h5 className="tag-title">GSAP</h5>
-                    <span className="tag">Animation</span>
-                  </div>
-                </div>
-                <div className="tool loco">
-                  <div className="img">
-                    <img src={`loco.png`} alt="Locomotive"></img>
-                  </div>
-                  <div className="content">
-                    <h5 className="tag-title">Locomotive</h5>
-                    <span className="tag">Smooth scroll</span>
-                  </div>
-                </div>
-                <div className="tool vercel">
-                  <div className="img">
-                    <img src={`vercel.png`} alt="Vercel"></img>
-                  </div>
-                  <div className="content">
-                    <h5 className="tag-title">Vercel</h5>
-                    <span className="tag">Hosting</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="site-status">
+          <DotUpTime />
+          <span className="status-btn">Status</span>
         </div>
       </StyledFooterContent>
-    </StyledCredit>
-  </StyledFooter>
-);
+    </StyledFooter>
+  );
+};
 
 export default Footer;

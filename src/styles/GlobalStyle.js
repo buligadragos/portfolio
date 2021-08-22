@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
 
   :root {
     --font-sans: 'Josefin Sans', 'San Francisco', 'SF Pro Text', -apple-system, system-ui, sans-serif;
-    --font-mono: 'Silka', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+    --font-mono: 'Armin Grotesk', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
 
     --fz-xxs: 12px;
     --fz-xs: 13px;
@@ -32,6 +32,13 @@ const GlobalStyle = createGlobalStyle`
 
     --easing: cubic-bezier(0.645, 0.045, 0.355, 1);
     --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    --tooltip_bg: rgba(0,0,0, .8);
+    --tooltip_color: #ffffff;
+    --tooltip_fontsize: 13px;
+    --tooltip_minwidth: 120px;
+    --tooltip_borderradius: 5px;
+    --tooltip_cursor: help;
   }
 
   html {
@@ -46,6 +53,16 @@ const GlobalStyle = createGlobalStyle`
   *:after {
     box-sizing: inherit;
   }
+
+ .noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
 
   ::selection {
     background-color: var(--grey);
@@ -185,7 +202,7 @@ const GlobalStyle = createGlobalStyle`
 
     &:before {
       position: relative;
-      bottom: 4px;
+      bottom: -3px;
       counter-increment: section;
       content: '0' counter(section) '.';
       margin-right: 10px;

@@ -4,7 +4,8 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import sr from '@utils/sr';
 import { srConfig } from '@config';
-import { Icon, IconArchive } from '@components/icons';
+import { IconArchive } from '@components/icons';
+import DotUpTime from '../icons/uptime';
 
 const Icons = styled.span`
   position: relative;
@@ -89,32 +90,8 @@ const StyledProject = styled.li`
     }
   }
 
-  .project-links {
-    display: flex;
-    align-items: center;
-    position: relative;
-    margin-left: -10px;
-    color: var(--headline);
-
-    a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0 0 0 20px;
-
-      &.external {
-        svg {
-          width: 22px;
-          height: 22px;
-          margin-top: -4px;
-        }
-      }
-
-      svg {
-        width: 20px;
-        height: 20px;
-      }
-    }
+  .project-status {
+    margin-right: 10px;
   }
 
   .right-side {
@@ -306,14 +283,14 @@ const Featured = () => {
         {featuredProjects &&
           featuredProjects.map(({ node }, i) => {
             const { frontmatter } = node;
-            const { title, coverlg, coversm, slug, tech, github, external } = frontmatter;
+            const { title, coverlg, coversm, tech, external } = frontmatter;
             const coverdesktop = getImage(coverlg);
             const covermobile = getImage(coversm);
 
             return (
               <StyledProject key={i} ref={el => (revealProjects.current[i] = el)}>
                 <div className="project-preview">
-                  <Link to={slug} className="prew">
+                  <Link to={external} className="prew">
                     <StyledProjectPreview>
                       <El1>
                         <GatsbyImage image={coverdesktop} alt={title} className="img" />
@@ -339,18 +316,7 @@ const Featured = () => {
                     </div>
 
                     <div className="right-side">
-                      <div className="project-links">
-                        {github && (
-                          <a href={github} aria-label="GitHub Link">
-                            <Icon name="GitHub" />
-                          </a>
-                        )}
-                        {external && (
-                          <a href={external} aria-label="External Link" className="external">
-                            <Icon name="External" />
-                          </a>
-                        )}
-                      </div>
+                      <div className="project-status">{external && <DotUpTime />}</div>
                     </div>
                   </div>
                 </div>

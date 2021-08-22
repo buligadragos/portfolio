@@ -40,8 +40,8 @@ const StyledText = styled.div`
         position: absolute;
         left: 0;
         color: var(--accent);
-        font-size: var(--fz-md);
-        line-height: 12px;
+        font-size: var(--fz-xxl);
+        line-height: 16px;
       }
     }
   }

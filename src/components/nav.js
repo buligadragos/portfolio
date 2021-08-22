@@ -80,44 +80,55 @@ const LeftWrapper = styled.div`
   line-height: normal;
   font-size: 0.8rem;
   text-transform: uppercase;
-  transition: all 0.5s ease;
 
   span {
-    transition: all 0.5s ease;
     @media (max-width: 550px) {
       display: none;
     }
   }
 
   .city {
-    padding-bottom: 0.6rem;
-    padding-top: 0.3rem;
-  }
-
-  .getlocation {
-    transform: translateY(50px);
-    position: absolute;
-    top: 1.5rem;
+    margin-bottom: 0.3rem;
     cursor: pointer;
+  }
+
+  .nav-temp {
+    text-decoration: none;
+    justify-self: start;
+    display: flex;
+    color: var(--headline);
+  }
+  .nav-temp svg {
+    width: 1.2em;
+    margin-right: 0.5ch;
+  }
+
+  .nav-temp-extension::before {
+    display: inline-block;
+    content: ' — ';
+    transform: translateX(-2ch);
+    transition: all 0.6s ease;
+  }
+
+  .nav-temp-extension {
+    display: inline-block;
+    transform: translateX(-2ch);
+    opacity: 0;
+    transition: all 0.6s ease;
+  }
+  .city:hover {
     color: var(--accent);
+    transition: all 0.6s ease;
   }
-
-  :hover .city {
-    transform: translateY(-100px);
+  .city:hover .nav-temp-extension {
+    transform: translateX(0);
+    opacity: 1;
+    color: var(--accent);
+    transition: all 0.6s ease;
   }
-  :hover .getlocation {
-    transform: translateY(0px);
-  }
-`;
-const StyledClock = styled.time`
-  .separator {
-    animation: blinker 2s linear infinite;
-  }
-
-  @keyframes blinker {
-    50% {
-      opacity: 0;
-    }
+  .city:hover .nav-temp-extension:before {
+    transform: translateX(0);
+    transition: all 0.6s ease;
   }
 `;
 
@@ -189,40 +200,11 @@ const Nav = ({ isFirstMount }) => {
       });
   }, [lat, long]);
 
-  // Ora
-  const serverTime = 'Europe/Bucharest';
-  const localTime = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-  const [loc, setLoc] = useState([serverTime]);
-  const [today, setDate] = useState(new Date());
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setDate(new Date());
-    }, 60 * 1000);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
-
-  const day = today.toLocaleDateString('en-US', { weekday: 'long' });
-  const time = today.toLocaleTimeString('en-US', {
-    timeZone: loc,
-    hour: 'numeric',
-    hour12: false,
-    minute: 'numeric',
-  });
-
-  const HHMM = time.split(':');
-  const hour = HHMM[0];
-  const minutes = HHMM[1];
-
   const handleLocation = () => {
     navigator.geolocation.getCurrentPosition(function(position) {
       setLat(position.coords.latitude);
       setLong(position.coords.longitude);
     });
-    setLoc(localTime);
   };
   return (
     <StyledHeader scrollDirection={scrollDirection} scrolledToTop={scrolledToTop}>
@@ -232,27 +214,35 @@ const Nav = ({ isFirstMount }) => {
             <StyledMenu>
               <LeftWrapper>
                 <span
+                  className="nav-temp city noselect"
                   tabIndex={0}
                   role="button"
-                  className="city"
                   onClick={handleLocation}
                   onKeyDown={handleLocation}>
-                  {weatherInfo.city}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 16 16">
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                  </svg>
+                  {/* {weatherInfo.city} */}
+                  TIMISOARA
+                  <span className="nav-temp-extension noselect">(get my location)</span>
                 </span>
-                <span
-                  tabIndex={0}
-                  role="button"
-                  className="getlocation"
-                  onClick={handleLocation}
-                  onKeyDown={handleLocation}>
-                  GET MY LOCATION
+                <span className="nav-temp noselect">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 16 16">
+                    <path d="M8 14a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                    <path d="M8 0a2.5 2.5 0 0 0-2.5 2.5v7.55a3.5 3.5 0 1 0 5 0V2.5A2.5 2.5 0 0 0 8 0zM6.5 2.5a1.5 1.5 0 1 1 3 0v7.987l.167.15a2.5 2.5 0 1 1-3.333 0l.166-.15V2.5z" />
+                  </svg>
+                  {Math.round(weatherInfo.temperature)}℃
                 </span>
-
-                <StyledClock>
-                  <span>{day}</span> <span>{hour}</span>
-                  <span className="separator">:</span>
-                  <span>{minutes}</span>
-                </StyledClock>
               </LeftWrapper>
 
               <RightWrapper>
@@ -266,7 +256,6 @@ const Nav = ({ isFirstMount }) => {
                   />
                   {colorMode === 'dark' ? <Toggle name="sun" /> : <Toggle name="moon" />}
                 </label>
-                <span>{Math.round(weatherInfo.temperature)}℃</span>
               </RightWrapper>
             </StyledMenu>
           </CSSTransition>
