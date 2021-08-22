@@ -18,15 +18,27 @@ const StyledHeader = styled.header`
 `;
 
 const StyledLogo = styled.div`
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  a {
+    position: fixed;
+    top: 1.45rem;
+    left: 50%;
+    width: 7.43056vw;
+    min-width: 110px;
+    transform: translateX(-50%);
+    z-index: 2;
+    pointer-events: all;
+
+    @media (max-width: 550px) {
+      top: 1rem;
+      width: 33.43056vw;
+    }
+  }
 
   svg {
     fill: var(--headline);
-    transition: var(--transition);
-    width: 170px;
-    height: 42px;
+    display: block;
+    width: 100%;
+    height: auto;
   }
 `;
 
@@ -227,8 +239,7 @@ const Nav = ({ isFirstMount }) => {
                     viewBox="0 0 16 16">
                     <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
                   </svg>
-                  {/* {weatherInfo.city} */}
-                  TIMISOARA
+                  {weatherInfo.city}
                   <span className="nav-temp-extension noselect">(get my location)</span>
                 </span>
                 <span className="nav-temp noselect">
@@ -245,6 +256,12 @@ const Nav = ({ isFirstMount }) => {
                 </span>
               </LeftWrapper>
 
+              <StyledLogo className="logo" tabIndex="-1">
+                <Link to="/" aria-label="home">
+                  <IconLogo />
+                </Link>
+              </StyledLogo>
+
               <RightWrapper>
                 <label>
                   <input
@@ -258,18 +275,6 @@ const Nav = ({ isFirstMount }) => {
                 </label>
               </RightWrapper>
             </StyledMenu>
-          </CSSTransition>
-        )}
-      </TransitionGroup>
-
-      <TransitionGroup component={null}>
-        {isMounted && (
-          <CSSTransition classNames={fadeDownClass} timeout={timeout}>
-            <StyledLogo className="logo" tabIndex="-1">
-              <Link to="/" aria-label="home">
-                <IconLogo />
-              </Link>
-            </StyledLogo>
           </CSSTransition>
         )}
       </TransitionGroup>

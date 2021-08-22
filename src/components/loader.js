@@ -19,13 +19,15 @@ const StyledLoader = styled.div`
   background-color: var(--loaderbg);
   z-index: 99;
   .logo-wrapper {
-    width: max-content;
-    max-width: 10vw;
-    transition: var(--transition);
-    opacity: ${props => (props.isMounted ? 1 : 0)};
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 10.43056vw;
+    min-width: 110px;
+    transform: translateX(-50%);
     svg {
       display: block;
-      width: 10vw;
+      width: 100%;
       height: auto;
       fill: var(--accent);
     }
