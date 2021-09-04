@@ -100,9 +100,13 @@ const StyledFooterContent = styled.div`
     cursor: pointer;
   }
 
-  .site-status:hover {
-    color: var(--accent);
-    transition: color 0.4s;
+  .status-btn:hover {
+    background: linear-gradient(90deg, #ff7f51, #e85333, #a02817);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    outline: 0;
+    transition: all 0.4s ease-out;
   }
 
   .uptime {
@@ -161,7 +165,7 @@ const Footer = () => {
   const minutes = HHMM[1];
 
   return (
-    <StyledFooter>
+    <StyledFooter data-scroll-section>
       <StyledFooterContent>
         <div className="copyright">
           <StyledClock>

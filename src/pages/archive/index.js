@@ -1,12 +1,10 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { graphql, Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
-import { srConfig } from '@config';
-import sr from '@utils/sr';
-import { Icon, IconHome } from '@components/icons';
-import { motion } from 'framer-motion';
+import { Icon } from '@components/icons';
+import useLocoScroll from '../../hooks/useLocoScroll';
 
 const StyledHeader = styled.div`
   text-align: center;
@@ -134,69 +132,33 @@ const StyledTableContainer = styled.div`
   }
 `;
 
-const StyledArchiveLink = styled.div`
+const StyledHomeLink = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 80px auto 0;
-`;
 
-const Icons = styled.span`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 2.077vw;
-  height: 1.806vw;
-  margin-left: 0.26vw;
-  overflow: hidden;
-
-  svg {
-    position: absolute;
-    transition: transform 0.7s cubic-bezier(0.4, 0, 0, 1);
-  }
-
-  @media (max-width: 550px) {
-    margin-left: 2.26vw;
-    width: 4.077vw;
-    height: 3.806vw;
+  .subtitle {
+    font-family: var(--font-sans);
+    font-size: var(--fz-xl);
   }
 `;
 
-const WorksPage = ({ data }) => {
+const ArchivePage = ({ data }) => {
   const projects = data.allMarkdownRemark.edges;
-  const revealTitle = useRef(null);
-  const revealTable = useRef(null);
-  const revealProjects = useRef([]);
-  const revealButton = useRef([]);
-  const transition = { duration: 2.0, ease: [0.6, 0.01, -0.05, 0.9] };
 
-  useEffect(() => {
-    sr.reveal(revealTitle.current, srConfig());
-    sr.reveal(revealTable.current, srConfig(200, 0));
-    sr.reveal(revealButton.current, srConfig(600, 0));
-    revealProjects.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 10)));
-  }, []);
-
+  useLocoScroll.update;
   return (
-    <>
+    <main>
       <Helmet title="Archive" />
 
-      <motion.main
-        initial={{
-          opacity: 0,
-        }}
-        animate={{
-          opacity: 1,
-          transition: { ...transition },
-        }}>
-        <StyledHeader ref={revealTitle}>
+      <section data-scroll-section>
+        <StyledHeader>
           <h1 className="big-heading">Archive</h1>
           <p className="subtitle">A big list of things I’ve worked on</p>
         </StyledHeader>
 
-        <StyledTableContainer ref={revealTable}>
+        <StyledTableContainer>
           <table>
             <thead>
               <tr>
@@ -212,7 +174,7 @@ const WorksPage = ({ data }) => {
                 projects.map(({ node }, i) => {
                   const { date, github, external, title, tech, company } = node.frontmatter;
                   return (
-                    <tr key={i} ref={el => (revealProjects.current[i] = el)}>
+                    <tr key={i}>
                       <td className="overline year">{`${new Date(date).getFullYear()}`}</td>
 
                       <td className="title">{title}</td>
@@ -260,25 +222,22 @@ const WorksPage = ({ data }) => {
             </tbody>
           </table>
         </StyledTableContainer>
-        <StyledArchiveLink ref={revealButton}>
-          <Link className="svgbutton" to="/">
+        <StyledHomeLink>
+          <Link to="/" className="subtitle inline-link">
             Back to home
-            <Icons className="icons">
-              <IconHome className="svgicon-vis" />
-              <IconHome className="svgicon-hide" />
-            </Icons>
+            <Icon name="Home" />
           </Link>
-        </StyledArchiveLink>
-      </motion.main>
-    </>
+        </StyledHomeLink>
+      </section>
+    </main>
   );
 };
-WorksPage.propTypes = {
+ArchivePage.propTypes = {
   location: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
 };
 
-export default WorksPage;
+export default ArchivePage;
 
 export const pageQuery = graphql`
   {

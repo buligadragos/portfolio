@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
-import { loaderDelay } from '@utils';
 
 const StyledSideElement = styled.div`
   position: fixed;
@@ -29,31 +27,9 @@ const StyledSideElement = styled.div`
   }
 `;
 
-const Side = ({ children, isFirstMount, orientation }) => {
-  const [isMounted, setIsMounted] = useState(!isFirstMount);
-
-  useEffect(() => {
-    if (!isFirstMount) {
-      return;
-    }
-    const timeout = setTimeout(() => setIsMounted(true), loaderDelay);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  return (
-    <StyledSideElement orientation={orientation}>
-      <TransitionGroup component={null}>
-        {isMounted && (
-          <CSSTransition
-            classNames={isFirstMount ? 'fade' : ''}
-            timeout={isFirstMount ? loaderDelay : 0}>
-            {children}
-          </CSSTransition>
-        )}
-      </TransitionGroup>
-    </StyledSideElement>
-  );
-};
+const Side = ({ children, orientation }) => (
+  <StyledSideElement orientation={orientation}>{children}</StyledSideElement>
+);
 
 Side.propTypes = {
   children: PropTypes.node.isRequired,

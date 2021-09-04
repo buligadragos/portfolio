@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { IconLoader } from '@components/icons';
-import { gsap, Power1, Quart } from 'gsap';
+import { gsap, Power1 } from 'gsap';
 
 const StyledLoader = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ const StyledLoader = styled.div`
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--loaderbg);
+  background-color: var(--body);
   z-index: 99;
   .logo-wrapper {
     position: fixed;
@@ -29,7 +29,12 @@ const StyledLoader = styled.div`
       display: block;
       width: 100%;
       height: auto;
-      fill: var(--accent);
+      fill: url(#svg-gradient) #fff;
+    }
+  }
+  @media (max-width: 550px) {
+    .logo-wrapper {
+      width: 37.43056vw;
     }
   }
 `;
@@ -72,7 +77,14 @@ const Loader = ({ finishLoading }) => {
       )
       .to('#B_masked', { duration: 0.5, x: 34, ease: Power1.easeInOut }, `c-=${0.1}`)
       .to('#D_masked', { duration: 0.5, x: -34, ease: Power1.easeInOut }, `c-=${0.1}`)
-      .to('.loader', { duration: 0.5, opacity: 0, zIndex: -1, ease: Quart.easeInOut, delay: 0.5 });
+      .to('.loader', {
+        duration: 0.8,
+        ease: 'back.in',
+        scale: 0,
+        opacity: 0,
+        delay: 0.2,
+        stagger: { amount: -0.4 },
+      });
   };
 
   const [isMounted, setIsMounted] = useState(false);

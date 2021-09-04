@@ -4,10 +4,18 @@ const IconLogo = () => (
   <svg
     version="1.1"
     className="logoanim"
+    id="logo"
     width="107"
     height="27"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 107 27">
+    <defs>
+      <linearGradient id="svg-gradient" gradientTransform="rotate(45)">
+        <stop offset="0%" stopColor="var(--color-stop)" />
+        <stop offset="50%" stopColor="var(--color-stop2)" />
+        <stop offset="100%" stopColor="var(--color-bot)" />
+      </linearGradient>
+    </defs>
     <g id="buliga">
       <path
         id="B"
@@ -101,8 +109,20 @@ const IconLogo = () => (
 		c-0.2-0.4-0.4-0.7-0.7-0.9s-0.6-0.4-1-0.5s-0.7-0.2-1-0.2H1.4V25.6z"
       />
     </g>
-    <path id="bar_top" className="st2" d="M0,0h87v1.5H0V0z" data-svg-origin="0 0.75" />
-    <path id="bar_bottom" className="st4" d="M20,25.5h87V27H20V25.5z" data-svg-origin="107 26.25" />
+    <path
+      id="bar_top"
+      className="st2"
+      d="M0,0h87v1.5H0V0z"
+      data-svg-origin="0 0.75"
+      transform="matrix(0,0,0,1,0,0)"
+    />
+    <path
+      id="bar_bottom"
+      className="st4"
+      d="M20,25.5h87V27H20V25.5z"
+      data-svg-origin="107 26.25"
+      transform="matrix(0,0,0,1,107,0)"
+    />
 
     <path
       id="D_masked"
@@ -111,6 +131,7 @@ const IconLogo = () => (
 	c-0.5,0-0.9,0.1-1.3,0.2s-0.7,0.3-1,0.6c-0.3,0.3-0.5,0.6-0.7,0.9c-0.2,0.4-0.2,0.8-0.2,1.3c0,0.5,0.1,1,0.3,1.4
 	c0.2,0.4,0.4,0.7,0.7,0.9s0.6,0.4,1,0.5c0.4,0.1,0.7,0.2,1,0.2h1.5V19.6z"
       data-svg-origin="107 22"
+      transform="matrix(1,0,0,1,20,0)"
     />
 
     <path
@@ -121,6 +142,7 @@ const IconLogo = () => (
 	c0.2-0.2,0.3-0.5,0.3-0.9c0-0.4-0.1-0.7-0.4-0.9c-0.3-0.2-0.6-0.3-1-0.3H1.4v2.4H2.7z M2.7,7.4c0.3,0,0.6,0,0.8-0.1C3.8,7.2,4,7.1,4.1,6.9c0.1-0.2,0.2-0.4,0.2-0.7c0-0.3-0.1-0.5-0.3-0.7C3.9,5.4,3.7,5.2,3.4,5.2C3.2,5.1,2.9,5.1,2.6,5.1H1.4v2.4
 	H2.7z"
       data-svg-origin="1 4.999875677720411"
+      transform="matrix(1,0,0,1,-20,0)"
     />
   </svg>
 );

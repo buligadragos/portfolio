@@ -17,10 +17,13 @@ import {
   IconZap,
   IconContact,
   IconHome,
+  IconArchive,
 } from '@components/icons';
 
 const Icon = ({ name }) => {
   switch (name) {
+    case 'Archive':
+      return <IconArchive />;
     case 'AppStore':
       return <IconAppStore />;
     case 'Facebook':

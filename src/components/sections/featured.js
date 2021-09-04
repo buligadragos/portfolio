@@ -1,34 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
-import sr from '@utils/sr';
-import { srConfig } from '@config';
-import { IconArchive } from '@components/icons';
+import { Icon } from '@components/icons';
 import DotUpTime from '../icons/uptime';
-
-const Icons = styled.span`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 2.077vw;
-  height: 1.806vw;
-  margin-left: 0.26vw;
-  overflow: hidden;
-
-  svg {
-    position: absolute;
-    transition: transform 0.7s cubic-bezier(0.4, 0, 0, 1);
-  }
-
-  @media (max-width: 550px) {
-    margin-left: 2.26vw;
-    width: 4.077vw;
-    height: 3.806vw;
-  }
-`;
 
 const StyledProjectsGrid = styled.ul`
   list-style: none;
@@ -75,7 +50,10 @@ const StyledProject = styled.li`
 
     li {
       margin: 0 20px 5px 0;
-      color: var(--accent);
+      background: linear-gradient(90deg, #ff7f51, #e85333, #a02817);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
       font-family: var(--font-mono);
       font-size: var(--fz-xs);
       white-space: nowrap;
@@ -85,7 +63,6 @@ const StyledProject = styled.li`
       margin: 10px 0;
       li {
         margin: 0 10px 5px 0;
-        color: var(--accent);
       }
     }
   }
@@ -221,12 +198,9 @@ const StyledArchiveLink = styled.div`
   align-items: center;
   margin: 80px auto 0;
 
-  .archive-link {
+  .subtitle {
     font-family: var(--font-sans);
     font-size: var(--fz-xl);
-    &:after {
-      bottom: 0.1em;
-    }
   }
 `;
 
@@ -234,7 +208,7 @@ const Featured = () => {
   const data = useStaticQuery(graphql`
     {
       featured: allMarkdownRemark(
-        filter: { fileAbsolutePath: { regex: "/works/" } }
+        filter: { fileAbsolutePath: { regex: "/featured/" } }
         sort: { fields: [frontmatter___date], order: DESC }
       ) {
         edges {
@@ -265,19 +239,9 @@ const Featured = () => {
 
   const featuredProjects = data.featured.edges.filter(({ node }) => node);
 
-  const revealArchiveLink = useRef(null);
-  const revealTitle = useRef(null);
-  const revealProjects = useRef([]);
-  useEffect(() => {
-    sr.reveal(revealTitle.current, srConfig());
-    revealProjects.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 100)));
-  }, []);
-
   return (
-    <section id="projects">
-      <h2 className="numbered-heading" ref={revealTitle}>
-        Some Things I’ve Built
-      </h2>
+    <section id="projects" data-scroll-section>
+      <h2 className="numbered-heading">Some Things I’ve Built</h2>
 
       <StyledProjectsGrid>
         {featuredProjects &&
@@ -288,9 +252,9 @@ const Featured = () => {
             const covermobile = getImage(coversm);
 
             return (
-              <StyledProject key={i} ref={el => (revealProjects.current[i] = el)}>
+              <StyledProject key={i}>
                 <div className="project-preview">
-                  <Link to={external} className="prew">
+                  <a href={external} className="prew">
                     <StyledProjectPreview>
                       <El1>
                         <GatsbyImage image={coverdesktop} alt={title} className="img" />
@@ -301,7 +265,7 @@ const Featured = () => {
                         <span className="hovl" />
                       </El2>
                     </StyledProjectPreview>
-                  </Link>
+                  </a>
 
                   <div className="project-details">
                     <div className="left-side">
@@ -325,12 +289,9 @@ const Featured = () => {
           })}
 
         <StyledArchiveLink>
-          <Link className="svgbutton" to="/works" ref={revealArchiveLink}>
+          <Link to="/archive" className="subtitle inline-link">
             View the archive
-            <Icons className="icons">
-              <IconArchive className="svgicon-vis" />
-              <IconArchive className="svgicon-hide" />
-            </Icons>
+            <Icon name="Archive" />
           </Link>
         </StyledArchiveLink>
       </StyledProjectsGrid>

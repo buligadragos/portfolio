@@ -1,7 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { srConfig } from '@config';
-import sr from '@utils/sr';
 import { Icon } from '@components/icons';
 
 const StyledContactSection = styled.section`
@@ -30,7 +28,7 @@ const StyledContactSection = styled.section`
   .name-name,
   .ro {
     fill: var(--headline);
-    transition: 0.8s;
+    transition: all 0.4s ease-out;
   }
 
   .git-lines,
@@ -38,33 +36,34 @@ const StyledContactSection = styled.section`
   .insta-lines,
   .hi-lines {
     stroke: var(--grey);
-    transition: 0.5s;
+    transition: all 0.4s ease-out;
   }
 
   #git-txt,
   #insta-txt,
   #email-txt {
     fill: var(--grey);
-    transition: 0.2s;
+    transition: all 0.4s ease-out;
   }
 
   #git-txt:hover,
   #git-txt:hover ~ .name-name {
-    fill: var(--accent);
+    fill: url(#svg-gradient) #fff;
+    transition: all 0.4s ease-out;
   }
 
   #git-txt:hover + .git-lines {
-    stroke: var(--accent);
+    stroke: url(#contact-lines);
   }
 
   #insta-txt:hover,
   #insta-txt:hover ~ .name-name,
   #insta-txt:hover ~ .at-name {
-    fill: var(--accent);
+    fill: url(#svg-gradient) #fff;
   }
 
   #insta-txt:hover + .insta-lines {
-    stroke: var(--accent);
+    stroke: url(#contact-lines);
   }
 
   #email-txt:hover,
@@ -72,19 +71,19 @@ const StyledContactSection = styled.section`
   #email-txt:hover ~ .at-name,
   #email-txt:hover ~ .name-name,
   #email-txt:hover ~ .ro {
-    fill: var(--accent);
+    fill: url(#svg-gradient) #fff;
   }
 
   #email-txt:hover + .email-lines {
-    stroke: var(--accent);
+    stroke: url(#contact-lines);
   }
 
   #hi-txt:hover ~ .hello-name {
-    fill: var(--accent);
+    fill: url(#svg-gradient) #fff;
   }
 
   #hi-txt:hover + .hi-lines {
-    stroke: var(--accent);
+    stroke: url(#contact-lines);
   }
 
   @media (max-width: 768px) {
@@ -114,19 +113,14 @@ const StyledContactSection = styled.section`
   }
 `;
 
-const Contact = () => {
-  const revealContainer = useRef(null);
-  useEffect(() => sr.reveal(revealContainer.current, srConfig()), []);
+const Contact = () => (
+  <StyledContactSection id="contact" data-scroll-section>
+    <h2 className="numbered-heading overline scarlet">What’s Next?</h2>
 
-  return (
-    <StyledContactSection id="contact" ref={revealContainer}>
-      <h2 className="numbered-heading overline">What’s Next?</h2>
+    <h2 className="title">Get In Touch</h2>
 
-      <h2 className="title">Get In Touch</h2>
-
-      <Icon name="Contact" />
-    </StyledContactSection>
-  );
-};
+    <Icon name="Contact" />
+  </StyledContactSection>
+);
 
 export default Contact;

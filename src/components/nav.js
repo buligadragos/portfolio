@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
-import { loaderDelay } from '@utils';
-import { useScrollDirection } from '@hooks';
 import { IconLogo } from '@components/icons';
 import { ThemeContext, Toggle } from '@components';
 
@@ -15,6 +12,7 @@ const StyledHeader = styled.header`
   align-items: center;
   width: 100vw;
   height: 4rem;
+  opacity: 0;
 `;
 
 const StyledLogo = styled.div`
@@ -163,33 +161,10 @@ const StyledMenu = styled.div`
   }
 `;
 
-const Nav = ({ isFirstMount }) => {
-  const [isMounted, setIsMounted] = useState(!isFirstMount);
-  const scrollDirection = useScrollDirection('down');
-  const [scrolledToTop, setScrolledToTop] = useState(true);
+const Nav = () => {
   const { colorMode, setColorMode } = React.useContext(ThemeContext);
   const API_URL = process.env.GATSBY_WEATHER_API_URL;
   const API_KEY = process.env.GATSBY_WEATHER_API_KEY;
-
-  const handleScroll = () => {
-    setScrolledToTop(window.pageYOffset < 50);
-  };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsMounted(true);
-    }, 100);
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      clearTimeout(timeout);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  const timeout = isFirstMount ? loaderDelay : 0;
-  const fadeDownClass = isFirstMount ? 'fadedown' : '';
 
   const [lat, setLat] = useState([45.749439]);
   const [long, setLong] = useState([21.227221]);
@@ -218,66 +193,78 @@ const Nav = ({ isFirstMount }) => {
       setLong(position.coords.longitude);
     });
   };
+
+  // useEffect(() => {
+
+  //   const DOM = {
+  //     nav: document.querySelector('#navy'),
+  //   };
+
+  //   gsap.set(DOM.nav.children, { opacity: 0 });
+  //   gsap.to([DOM.nav.children, DOM.nav], {
+  //     duration: 0.9,
+  //     ease: 'back.out',
+  //     startAt: { opacity: 0, scale: 1.2 },
+  //     scale: 1,
+  //     opacity: 1,
+  //   }, 'a');
+  // }, []);
+
   return (
-    <StyledHeader scrollDirection={scrollDirection} scrolledToTop={scrolledToTop}>
-      <TransitionGroup component={null}>
-        {isMounted && (
-          <CSSTransition classNames={fadeDownClass} timeout={timeout}>
-            <StyledMenu>
-              <LeftWrapper>
-                <span
-                  className="nav-temp city noselect"
-                  tabIndex={0}
-                  role="button"
-                  onClick={handleLocation}
-                  onKeyDown={handleLocation}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    viewBox="0 0 16 16">
-                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-                  </svg>
-                  {weatherInfo.city}
-                  <span className="nav-temp-extension noselect">(get my location)</span>
-                </span>
-                <span className="nav-temp noselect">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    viewBox="0 0 16 16">
-                    <path d="M8 14a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-                    <path d="M8 0a2.5 2.5 0 0 0-2.5 2.5v7.55a3.5 3.5 0 1 0 5 0V2.5A2.5 2.5 0 0 0 8 0zM6.5 2.5a1.5 1.5 0 1 1 3 0v7.987l.167.15a2.5 2.5 0 1 1-3.333 0l.166-.15V2.5z" />
-                  </svg>
-                  {Math.round(weatherInfo.temperature)}℃
-                </span>
-              </LeftWrapper>
+    <StyledHeader id="nav-bar">
+      <StyledMenu>
+        <LeftWrapper>
+          <span
+            className="nav-temp city noselect"
+            tabIndex={0}
+            role="button"
+            onClick={handleLocation}
+            onKeyDown={handleLocation}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16">
+              <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+            </svg>
+            {weatherInfo.city}
+            <span className="nav-temp-extension noselect">(get my location)</span>
+          </span>
+          <span className="nav-temp noselect">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              id="test"
+              fill="currentColor"
+              viewBox="0 0 16 16">
+              <path d="M8 14a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+              <path d="M8 0a2.5 2.5 0 0 0-2.5 2.5v7.55a3.5 3.5 0 1 0 5 0V2.5A2.5 2.5 0 0 0 8 0zM6.5 2.5a1.5 1.5 0 1 1 3 0v7.987l.167.15a2.5 2.5 0 1 1-3.333 0l.166-.15V2.5z" />
+            </svg>
+            {Math.round(weatherInfo.temperature)}℃
+          </span>
+        </LeftWrapper>
 
-              <StyledLogo className="logo" tabIndex="-1">
-                <Link to="/" aria-label="home">
-                  <IconLogo />
-                </Link>
-              </StyledLogo>
+        <StyledLogo className="logo" tabIndex="-1">
+          <Link to="/" aria-label="home">
+            <IconLogo />
+          </Link>
+        </StyledLogo>
 
-              <RightWrapper>
-                <label>
-                  <input
-                    type="checkbox"
-                    onChange={ev => {
-                      setColorMode(ev.target.checked ? 'dark' : 'light');
-                    }}
-                    checked={colorMode === 'dark'}
-                  />
-                  {colorMode === 'dark' ? <Toggle name="sun" /> : <Toggle name="moon" />}
-                </label>
-              </RightWrapper>
-            </StyledMenu>
-          </CSSTransition>
-        )}
-      </TransitionGroup>
+        <RightWrapper>
+          <label>
+            <input
+              type="checkbox"
+              onChange={ev => {
+                setColorMode(ev.target.checked ? 'dark' : 'light');
+              }}
+              checked={colorMode === 'dark'}
+            />
+            {colorMode === 'dark' ? <Toggle name="sun" /> : <Toggle name="moon" />}
+          </label>
+        </RightWrapper>
+      </StyledMenu>
     </StyledHeader>
   );
 };

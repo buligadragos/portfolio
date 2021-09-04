@@ -1,9 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
-import { srConfig } from '@config';
-import sr from '@utils/sr';
-import Tilt from 'react-parallax-tilt';
 import { Icon } from '@components/icons';
 
 const StyledAboutSection = styled.section`
@@ -39,7 +36,10 @@ const StyledText = styled.div`
         content: '▹';
         position: absolute;
         left: 0;
-        color: var(--accent);
+        background: linear-gradient(90deg, #ff7f51, #e85333, #a02817);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
         font-size: var(--fz-xxl);
         line-height: 16px;
       }
@@ -79,96 +79,76 @@ const StyledPic = styled.div`
   }
 `;
 
-const About = () => {
-  const revealContainer = useRef(null);
+const About = () => (
+  <StyledAboutSection id="about" data-scroll-section>
+    <h2 className="numbered-heading">About Me</h2>
 
-  useEffect(() => {
-    sr.reveal(revealContainer.current, srConfig());
-  }, []);
+    <div className="inner">
+      <StyledText>
+        <div>
+          <p>
+            I am an ambitious, naturally curious college student with a great passion for Computer
+            Science. My interest in web development started back in 2015 when I decided to
+            participate in the scientific communication session organized by my high school with my
+            very first website.
+          </p>
 
-  const TiltImg = () => (
-    <Tilt
-      className="parallax-effect"
-      perspective={1300}
-      glareEnable={true}
-      transitionSpeed={5500}
-      glareMaxOpacity={0.25}
-      scale={1.15}>
-      <StaticImage
-        className="img"
-        src="../../images/me.jpg"
-        width={500}
-        quality={95}
-        formats={['AUTO', 'WEBP', 'AVIF']}
-        alt="Avatar"
-      />
-    </Tilt>
-  );
-
-  return (
-    <StyledAboutSection id="about" ref={revealContainer}>
-      <h2 className="numbered-heading">About Me</h2>
-
-      <div className="inner">
-        <StyledText>
-          <div>
-            <p>
-              I am an ambitious, naturally curious college student with a great passion for Computer
-              Science. My interest in web development started back in 2015 when I decided to
-              participate in the scientific communication session organized by my high school with
-              my very first website.
-            </p>
-
-            <p>
-              Fast-forward to today, I’m now focusing on web apps and data analysis, am currently
-              pursuing my Master of Science in E-Business at{' '}
-              <a href="https://www.ubbcluj.ro/en/" className="inline-link">
-                Babes-Bolyai University
-              </a>
-              , and working as a freelancer on{' '}
-              <a
-                href="https://www.upwork.com/freelancers/~0187fc4de875739745"
-                className="inline-link">
-                Upwork
-              </a>
-              .{' '}
-            </p>
-
-            <p>
-              You can read more about my experience, skills, education, and much more in the PDF
-              attached below:
-            </p>
-
-            <p></p>
-
-            <a
-              href="/resume.pdf"
-              aria-label="External Link"
-              className="subtitle inline-link"
-              target="_blank"
-              rel="noopener noreferrer">
-              My resume
-              <Icon name="External" />
+          <p>
+            Fast-forward to today, I’m now focusing on web apps and data analysis, am currently
+            pursuing my Master of Science in E-Business at{' '}
+            <a href="https://www.ubbcluj.ro/en/" className="inline-link scarlet">
+              Babes-Bolyai University
             </a>
+            , and working as a freelancer on{' '}
+            <a
+              href="https://www.upwork.com/freelancers/~0187fc4de875739745"
+              className="inline-link scarlet">
+              Upwork
+            </a>
+            .{' '}
+          </p>
 
-            <p>Here are a few technologies I've been working with recently:</p>
-          </div>
+          <p>
+            You can read more about my experience, skills, education, and much more in the PDF
+            attached below:
+          </p>
 
-          <ul className="skills-list">
-            <li>JavaScript (ES6+)</li>
-            <li>React</li>
-            <li>WordPress</li>
-          </ul>
-        </StyledText>
+          <p></p>
 
-        <StyledPic>
-          <div className="wrapper">
-            <TiltImg />
-          </div>
-        </StyledPic>
-      </div>
-    </StyledAboutSection>
-  );
-};
+          <a
+            href="/resume.pdf"
+            aria-label="External Link"
+            className="subtitle inline-link"
+            target="_blank"
+            rel="noopener noreferrer">
+            My resume
+            <Icon name="External" />
+          </a>
+
+          <p>Here are a few technologies I've been working with recently:</p>
+        </div>
+
+        <ul className="skills-list">
+          <li>JavaScript (ES6+)</li>
+          <li>React</li>
+          <li>WordPress</li>
+        </ul>
+      </StyledText>
+
+      <StyledPic>
+        <div className="wrapper">
+          <StaticImage
+            className="img"
+            src="../../images/me.jpg"
+            width={500}
+            quality={95}
+            formats={['AUTO', 'WEBP', 'AVIF']}
+            alt="Avatar"
+          />
+        </div>
+      </StyledPic>
+    </div>
+  </StyledAboutSection>
+);
 
 export default About;

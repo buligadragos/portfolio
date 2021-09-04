@@ -13,25 +13,63 @@ const ProgressContainer = styled.div`
 `;
 
 const Trackline = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 164px;
-  max-height: 425px;
+  height: 135px;
+  position: fixed;
+  top: 50%;
   width: 2px;
-  background-color: var(--grey);
-  opacity: 0.6;
-  overflow: hidden;
-  z-index: 9999;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+  -moz-transform: translate3d(-50%, -50%, 0);
+  -o-transform: translate3d(-50%, -50%, 0);
+  -ms-transform: translate3d(-50%, -50%, 0);
+  transform: translate3d(-50%, -50%, 0);
+  z-index: 1;
+  opacity: 1;
+  margin-top: -14px;
+  mix-blend-mode: difference;
+  -webkit-transition: opacity 0.6s 0.9s, margin-top 0.6s 0.9s;
+  -moz-transition: opacity 0.6s 0.9s, margin-top 0.6s 0.9s;
+  -ms-transition: opacity 0.6s 0.9s, margin-top 0.6s 0.9s;
+  -o-transition: opacity 0.6s 0.9s, margin-top 0.6s 0.9s;
+  transition: opacity 1.6s 1.9s, margin-top 5.6s 5.9s;
+
+  .bottomBar {
+    left: 0;
+    position: absolute;
+    top: auto;
+    width: 100%;
+    bottom: 0;
+
+    ::after {
+      content: '';
+      height: calc(100% - 20px);
+      left: 0;
+      position: absolute;
+      top: auto;
+      width: 100%;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    ::before {
+      content: '';
+      height: 2px;
+      left: 0;
+      position: absolute;
+      top: 8px;
+      width: 100%;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+  }
 `;
 
 const ProgressLine = styled.div`
-  position: absolute;
-  height: 100%;
-  top: -100%;
-  width: 2px;
-  background-color: var(--accent);
+  height: 0;
   left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background: var(--accent);
 `;
 
 const Progress = ({ contentHeight, isFirstMount }) => {
@@ -62,7 +100,8 @@ const Progress = ({ contentHeight, isFirstMount }) => {
     <Side isFirstMount={isFirstMount} orientation="right" tabIndex={-1}>
       <ProgressContainer tabIndex={-1}>
         <Trackline aria-hidden="true">
-          <ProgressLine style={{ transform: `translateY(${progress}%)` }} />
+          <ProgressLine style={{ height: `${progress}%` }} />
+          <div className="bottomBar" style={{ height: `calc(100% - ${progress}%)` }}></div>
         </Trackline>
       </ProgressContainer>
     </Side>

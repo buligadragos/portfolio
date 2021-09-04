@@ -1,6 +1,6 @@
 export const COLORS = {
   body: {
-    light: '#eee',
+    light: '#f5efe1',
     dark: '#161616',
   },
   headline: {
@@ -16,8 +16,8 @@ export const COLORS = {
     dark: '#AAAAB1',
   },
   accent: {
-    light: '#AD343E',
-    dark: '#C7434E',
+    light: 'linear-gradient(90deg,#ff7f51,#e85333,#a02817)',
+    dark: 'linear-gradient(90deg,#ff7f51,#e85333,#a02817)',
   },
   shadow: {
     light: 'hsla(0,0%,10%,0.1)',

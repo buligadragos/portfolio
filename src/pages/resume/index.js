@@ -3,7 +3,6 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 
 const StyledHeader = styled.div`
   text-align: center;
@@ -42,20 +41,12 @@ const Icons = styled.span`
 const ResumePage = () => {
   const revealTitle = useRef(null);
   const revealButton = useRef([]);
-  const transition = { duration: 2.0, ease: [0.6, 0.01, -0.05, 0.9] };
 
   return (
     <>
       <Helmet title="Resume" />
 
-      <motion.main
-        initial={{
-          opacity: 0,
-        }}
-        animate={{
-          opacity: 1,
-          transition: { ...transition },
-        }}>
+      <main>
         <StyledHeader ref={revealTitle}>
           <h1 className="big-heading">Resume</h1>
           <p className="subtitle">A big list of things I’ve worked on</p>
@@ -67,7 +58,7 @@ const ResumePage = () => {
             <Icons className="icons"></Icons>
           </Link>
         </StyledArchiveLink>
-      </motion.main>
+      </main>
     </>
   );
 };

@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
-import { CSSTransition } from 'react-transition-group';
 import styled from 'styled-components';
-import { srConfig } from '@config';
 import { KEY_CODES } from '@utils';
-import sr from '@utils/sr';
 
 const StyledJobsSection = styled.section`
   max-width: 700px;
@@ -71,8 +68,11 @@ const StyledTabButton = styled.button`
   height: var(--tab-height);
   padding: 0 20px 2px;
   border-left: 2px solid var(--grey);
-  background-color: transparent;
-  color: ${({ isActive }) => (isActive ? 'var(--accent)' : 'var(--grey)')};
+  background: ${({ isActive }) =>
+    isActive ? 'linear-gradient(90deg,#ff7f51,#e85333,#a02817);' : 'var(--grey)'};
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-family: var(--font-mono);
   font-size: var(--fz-xs);
   text-align: left;
@@ -93,8 +93,10 @@ const StyledTabButton = styled.button`
   &:hover,
   &:active,
   &:focus {
-    background-color: var(--hoverbg);
-    color: var(--accent);
+    background: linear-gradient(90deg, #ff7f51, #e85333, #a02817);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     outline: 0;
   }
 `;
@@ -107,7 +109,7 @@ const StyledHighlight = styled.div`
   width: 2px;
   height: var(--tab-height);
   border-radius: var(--border-radius);
-  background: var(--accent);
+  background: linear-gradient(90deg, #ff7f51, #e85333, #a02817);
   transform: translateY(calc(${({ activeTabId }) => activeTabId} * var(--tab-height)));
   transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition-delay: 0.1s;
@@ -151,7 +153,10 @@ const StyledTabPanel = styled.div`
         content: '▹';
         position: absolute;
         left: 0;
-        color: var(--accent);
+        background: linear-gradient(90deg, #ff7f51, #e85333, #a02817);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
         line-height: 25px;
         font-size: var(--fz-xxl);
       }
@@ -163,7 +168,10 @@ const StyledTabPanel = styled.div`
     font-weight: 500;
     line-height: 1.3;
     .company {
-      color: var(--accent);
+      background: linear-gradient(90deg, #ff7f51, #e85333, #a02817);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
   }
   .range {
@@ -202,9 +210,6 @@ const Jobs = () => {
   const [activeTabId, setActiveTabId] = useState(0);
   const [tabFocus, setTabFocus] = useState(null);
   const tabs = useRef([]);
-
-  const revealContainer = useRef(null);
-  useEffect(() => sr.reveal(revealContainer.current, srConfig()), []);
 
   const focusTab = () => {
     if (tabs.current[tabFocus]) {
@@ -246,7 +251,7 @@ const Jobs = () => {
   };
 
   return (
-    <StyledJobsSection id="jobs" ref={revealContainer}>
+    <StyledJobsSection id="jobs" data-scroll-section>
       <h2 className="numbered-heading">Where I’ve Worked</h2>
 
       <div className="inner">
@@ -279,29 +284,28 @@ const Jobs = () => {
               const { title, url, company, range } = frontmatter;
 
               return (
-                <CSSTransition key={i} in={activeTabId === i} timeout={250} classNames="fade">
-                  <StyledTabPanel
-                    id={`panel-${i}`}
-                    role="tabpanel"
-                    tabIndex={activeTabId === i ? '0' : '-1'}
-                    aria-labelledby={`tab-${i}`}
-                    aria-hidden={activeTabId !== i}
-                    hidden={activeTabId !== i}>
-                    <h3>
-                      <span>{title}</span>
-                      <span className="company">
-                        &nbsp;@&nbsp;
-                        <a href={url} className="inline-link">
-                          {company}
-                        </a>
-                      </span>
-                    </h3>
+                <StyledTabPanel
+                  key={i}
+                  id={`panel-${i}`}
+                  role="tabpanel"
+                  tabIndex={activeTabId === i ? '0' : '-1'}
+                  aria-labelledby={`tab-${i}`}
+                  aria-hidden={activeTabId !== i}
+                  hidden={activeTabId !== i}>
+                  <h3>
+                    <span>{title}</span>
+                    <span className="company">
+                      &nbsp;@&nbsp;
+                      <a href={url} className="inline-link">
+                        {company}
+                      </a>
+                    </span>
+                  </h3>
 
-                    <p className="range">{range}</p>
+                  <p className="range">{range}</p>
 
-                    <div dangerouslySetInnerHTML={{ __html: html }} />
-                  </StyledTabPanel>
-                </CSSTransition>
+                  <div dangerouslySetInnerHTML={{ __html: html }} />
+                </StyledTabPanel>
               );
             })}
         </StyledTabPanels>
