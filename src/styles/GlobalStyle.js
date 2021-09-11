@@ -44,10 +44,6 @@ const GlobalStyle = createGlobalStyle`
   --color-bot: #a02817;
 }
 
-#contact-lines {
-  --color-bot: #a02817;
-}
-
   html {
     box-sizing: border-box;
     width: 100%;
@@ -318,8 +314,8 @@ const GlobalStyle = createGlobalStyle`
         height: 1em;
         bottom: 8px;
         position: absolute;
-        margin-left: 0.4vw;
-        stroke: url(#svg-gradient) #fff;
+        margin-left: 0.5em;
+        color: #a02817;
       }
     }
 

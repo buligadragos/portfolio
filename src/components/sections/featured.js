@@ -197,6 +197,7 @@ const StyledArchiveLink = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 80px auto 0;
+  margin-right: 2.2em;
 
   .subtitle {
     font-family: var(--font-sans);

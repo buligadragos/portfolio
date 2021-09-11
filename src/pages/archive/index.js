@@ -6,6 +6,10 @@ import styled from 'styled-components';
 import { Icon } from '@components/icons';
 import useLocoScroll from '../../hooks/useLocoScroll';
 
+const StyledArchiveSection = styled.section`
+  padding: 0px;
+`;
+
 const StyledHeader = styled.div`
   text-align: center;
 `;
@@ -152,7 +156,7 @@ const ArchivePage = ({ data }) => {
     <main>
       <Helmet title="Archive" />
 
-      <section data-scroll-section>
+      <StyledArchiveSection data-scroll-section>
         <StyledHeader>
           <h1 className="big-heading">Archive</h1>
           <p className="subtitle">A big list of things I’ve worked on</p>
@@ -228,7 +232,7 @@ const ArchivePage = ({ data }) => {
             <Icon name="Home" />
           </Link>
         </StyledHomeLink>
-      </section>
+      </StyledArchiveSection>
     </main>
   );
 };

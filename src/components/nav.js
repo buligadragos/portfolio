@@ -91,12 +91,6 @@ const LeftWrapper = styled.div`
   font-size: 0.8rem;
   text-transform: uppercase;
 
-  span {
-    @media (max-width: 550px) {
-      display: none;
-    }
-  }
-
   .city {
     margin-bottom: 0.3rem;
     cursor: pointer;
@@ -125,6 +119,9 @@ const LeftWrapper = styled.div`
     transform: translateX(-2ch);
     opacity: 0;
     transition: all 0.6s ease;
+    @media (max-width: 950px) {
+      display: none;
+    }
   }
   .city:hover {
     color: var(--accent);

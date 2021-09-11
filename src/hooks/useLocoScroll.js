@@ -21,6 +21,8 @@ const scroll = {
 
 const Scroll = callbacks => {
   gsap.registerPlugin(ScrollTrigger);
+  /* eslint no-console: ["error", { allow: ["log", "error"] }] */
+  console.log('init');
 
   useEffect(() => {
     const locomotiveScroll = new LocomotiveScroll({
@@ -132,6 +134,8 @@ const Scroll = callbacks => {
     return () => {
       if (locomotiveScroll) {
         locomotiveScroll.destroy();
+        /* eslint no-console: ["error", { allow: ["log", "error"] }] */
+        console.log('destroyed');
         tl.kill();
         gsap.set('#bar_bottom', { clearProps: 'all' });
         gsap.set('#bar_top', { clearProps: 'all' });

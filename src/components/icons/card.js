@@ -1,13 +1,8 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react';
 
 const IconContact = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 361.51 169.31">
-    <defs>
-      <linearGradient id="contact-lines" gradientTransform="rotate(90)">
-        <stop offset="100%" stopColor="var(--color-bot)" />
-      </linearGradient>
-    </defs>
-
     <g id="main">
       <a href="https://github.com/buligadragos" id="git-txt">
         <path
@@ -112,9 +107,9 @@ const IconContact = () => (
       </g>
 
       <a href="mailto:hello@buligadragos.ro" id="hi-txt">
-        <span role="img" aria-label="hello">
+        <text className="cls-3" transform="translate(23.8 168.21)">
           👋
-        </span>
+        </text>
       </a>
       <g className="hi-lines">
         <line className="cls-1" x1="0.39" y1="139.02" x2="0.39" y2="157.02" />
