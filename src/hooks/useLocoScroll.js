@@ -15,21 +15,21 @@ const scroll = {
     getDirection: true,
     touchMultiplier: 2.5,
     lerp: 0.1,
-    reloadOnContextChange: true,
   },
 };
 
 const Scroll = callbacks => {
   gsap.registerPlugin(ScrollTrigger);
-  /* eslint no-console: ["error", { allow: ["log", "error"] }] */
-  console.log('init');
 
   useEffect(() => {
     const locomotiveScroll = new LocomotiveScroll({
       el: document.querySelector(scroll.container),
       ...scroll.options,
     });
-    locomotiveScroll.update();
+
+    setTimeout(function() {
+      locomotiveScroll.update();
+    }, 100);
 
     // Exposing to the global scope for ease of use.
     window.scroll = locomotiveScroll;
@@ -88,8 +88,8 @@ const Scroll = callbacks => {
         trigger: '#logo',
         scroller: scroll.container,
         scrub: false,
-        start: 'top',
-        end: 'bottom',
+        start: 'top -64',
+        end: 99999,
         onUpdate: ({ direction, isActive }) => {
           if (direction === -1 && isActive === false) {
             tl.reverse();
@@ -134,8 +134,6 @@ const Scroll = callbacks => {
     return () => {
       if (locomotiveScroll) {
         locomotiveScroll.destroy();
-        /* eslint no-console: ["error", { allow: ["log", "error"] }] */
-        console.log('destroyed');
         tl.kill();
         gsap.set('#bar_bottom', { clearProps: 'all' });
         gsap.set('#bar_top', { clearProps: 'all' });

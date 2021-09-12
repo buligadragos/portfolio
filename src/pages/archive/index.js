@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Icon } from '@components/icons';
-import useLocoScroll from '../../hooks/useLocoScroll';
 
 const StyledArchiveSection = styled.section`
   padding: 0px;
@@ -151,7 +150,6 @@ const StyledHomeLink = styled.div`
 const ArchivePage = ({ data }) => {
   const projects = data.allMarkdownRemark.edges;
 
-  useLocoScroll.update;
   return (
     <main>
       <Helmet title="Archive" />
