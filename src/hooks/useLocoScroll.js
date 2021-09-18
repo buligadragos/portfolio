@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 // We are excluding this from loading at build time in gatsby-node.js
 import LocomotiveScroll from 'locomotive-scroll';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { gsap, Power1 } from 'gsap';
+import { gsap, Power1, Power0 } from 'gsap';
 
 const scroll = {
   // Locomotive Scroll
@@ -55,6 +55,7 @@ const Scroll = callbacks => {
 
     //ADD HERE
     const DOM = {
+      scrollbar: document.querySelector('#scrollbar'),
       nav: document.querySelector('#nav-bar'),
       social: document.querySelector('#social'),
       hero: document.querySelector('#hero'),
@@ -72,6 +73,25 @@ const Scroll = callbacks => {
       },
       'a',
     );
+
+    //SCROLLBAR:
+    gsap.from(scroll.container, {
+      scrollTrigger: {
+        trigger: scroll.container,
+        scroller: scroll.container,
+        scrub: true,
+        markers: false,
+        start: 'top',
+        end: 'bottom bottom',
+        onUpdate: self => {
+          gsap.to(DOM.scrollbar, {
+            scaleY: self.progress.toFixed(3),
+            ease: Power0.easeOut,
+            transformOrigin: 'top center',
+          });
+        },
+      },
+    });
 
     gsap.set('#dragos .letter', { opacity: 1 });
     gsap.set('#buliga .letter', { opacity: 1 });
@@ -128,13 +148,21 @@ const Scroll = callbacks => {
       .to('#B_masked', { duration: 0.5, x: 34, ease: Power1.easeInOut }, `c-=${0.1}`)
       .to('#D_masked', { duration: 0.5, x: -34, ease: Power1.easeInOut }, `c-=${0.1}`);
 
-    ScrollTrigger.addEventListener('refresh', () => locomotiveScroll.update());
+    const lsUpdate = () => {
+      if (locomotiveScroll) {
+        locomotiveScroll.update();
+      }
+    };
+
+    ScrollTrigger.addEventListener('refresh', lsUpdate);
     ScrollTrigger.refresh();
 
     return () => {
       if (locomotiveScroll) {
+        ScrollTrigger.removeEventListener('refresh', lsUpdate);
         locomotiveScroll.destroy();
         tl.kill();
+        ScrollTrigger.refresh();
         gsap.set('#bar_bottom', { clearProps: 'all' });
         gsap.set('#bar_top', { clearProps: 'all' });
       }

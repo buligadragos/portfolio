@@ -8,7 +8,7 @@ const StyledSideElement = styled.div`
   top: 50%;
   bottom: ${props => (props.orientation === 'right' ? 'inherit' : 'inherit')};
   left: ${props => (props.orientation === 'left' ? '20px' : 'auto')};
-  right: ${props => (props.orientation === 'left' ? 'auto' : '40px')};
+  right: ${props => (props.orientation === 'left' ? 'auto' : '0px')};
   z-index: 10;
   color: var(--grey);
 
@@ -18,12 +18,12 @@ const StyledSideElement = styled.div`
   }
 
   @media (max-width: 768px) {
-    display: ${props => (props.orientation === 'right' ? 'inherit' : 'none')};
-    right: ${props => (props.orientation === 'left' ? 'auto' : '-30px')};
+    display: ${props => (props.orientation === 'right' ? 'inherit' : 'inherit')};
+    right: ${props => (props.orientation === 'left' ? 'auto' : '0px')};
   }
 
   @media (max-width: 550px) {
-    display: none;
+    display: ${props => (props.orientation === 'right' ? 'inherit' : 'none')};
   }
 `;
 

@@ -194,8 +194,8 @@ const Layout = ({ children, location }) => {
               <Scroll callbacks={location} />
               <StyledContent className="main-container" id="main-container" data-scroll-container>
                 <Nav />
-                <Social isFirstMount={isFirstMount} />
-                <Progress isFirstMount={isFirstMount} contentHeight={contentHeight} />
+                <Social />
+                <Progress contentHeight={contentHeight} />
 
                 <div id="content">
                   {children}

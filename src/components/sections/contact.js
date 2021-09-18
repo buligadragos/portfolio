@@ -41,34 +41,34 @@ const StyledContactSection = styled.section`
   }
   #git-txt:hover,
   #git-txt:hover ~ .name-name {
-    fill: #bb311e;
+    fill: var(--accent);
   }
   #git-txt:hover + .git-lines {
-    stroke: #bb311e;
+    stroke: var(--accent);
   }
   #insta-txt:hover,
   #insta-txt:hover ~ .name-name,
   #insta-txt:hover ~ .at-name {
-    fill: #bb311e;
+    fill: var(--accent);
   }
   #insta-txt:hover + .insta-lines {
-    stroke: #bb311e;
+    stroke: var(--accent);
   }
   #email-txt:hover,
   #email-txt:hover ~ .hello-name,
   #email-txt:hover ~ .at-name,
   #email-txt:hover ~ .name-name,
   #email-txt:hover ~ .ro {
-    fill: #bb311e;
+    fill: var(--accent);
   }
   #email-txt:hover + .email-lines {
-    stroke: #bb311e;
+    stroke: var(--accent);
   }
   #hi-txt:hover ~ .hello-name {
-    fill: #bb311e;
+    fill: var(--accent);
   }
   #hi-txt:hover + .hi-lines {
-    stroke: #bb311e;
+    stroke: var(--accent);
   }
   @media (max-width: 768px) {
     margin: 0 auto 50px;
@@ -76,7 +76,7 @@ const StyledContactSection = styled.section`
   .overline {
     display: block;
     margin-bottom: 20px;
-    color: #bb311e;
+    color: var(--accent);
     font-family: var(--font-mono);
     font-size: var(--fz-md);
     font-weight: 400;

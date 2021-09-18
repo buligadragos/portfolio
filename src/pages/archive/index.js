@@ -151,10 +151,10 @@ const ArchivePage = ({ data }) => {
   const projects = data.allMarkdownRemark.edges;
 
   return (
-    <main>
+    <main data-router-wrapper>
       <Helmet title="Archive" />
 
-      <StyledArchiveSection data-scroll-section>
+      <StyledArchiveSection data-scroll-section data-router-view="PageArchive">
         <StyledHeader>
           <h1 className="big-heading">Archive</h1>
           <p className="subtitle">A big list of things I’ve worked on</p>

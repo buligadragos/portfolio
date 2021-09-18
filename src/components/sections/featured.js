@@ -1,10 +1,9 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, Link } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import { Icon } from '@components/icons';
 import DotUpTime from '../icons/uptime';
-import AniLink from 'gatsby-plugin-transition-link/AniLink';
 
 const StyledProjectsGrid = styled.ul`
   list-style: none;
@@ -291,10 +290,10 @@ const Featured = () => {
           })}
 
         <StyledArchiveLink>
-          <AniLink cover bg="#663399" to="/archive" className="subtitle inline-link">
+          <Link to="/archive" className="subtitle inline-link">
             View the archive
             <Icon name="Archive" />
-          </AniLink>
+          </Link>
         </StyledArchiveLink>
       </StyledProjectsGrid>
     </section>

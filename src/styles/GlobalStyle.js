@@ -76,6 +76,18 @@ const GlobalStyle = createGlobalStyle`
     display: none;
   }
 
+  :-webkit-scrollbar-track {
+  //    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.1);
+  background-color: transparent;
+}
+:-webkit-scrollbar {
+  background-color: transparent;
+}
+:-webkit-scrollbar-thumb {
+  //    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: transparent;
+}
+
   :focus {
     outline: none;
   }
@@ -278,8 +290,14 @@ const GlobalStyle = createGlobalStyle`
 
     .svg-hover:hover,
     .svg-hover:focus {
-      stroke: url(#svg-gradient) #fff;
+      color: var(--accent);
     }
+
+    &:hover,
+    &:focus {
+      color: var(--accent);
+    }
+
     &.inline-link {
        background:linear-gradient(90deg,#ff7f51,#e85333,#a02817);
        -webkit-background-clip:text;

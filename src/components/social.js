@@ -31,8 +31,8 @@ const StyledSocialList = styled.ul`
   }
 `;
 
-const Social = ({ isFirstMount }) => (
-  <Side isFirstMount={isFirstMount} orientation="left">
+const Social = () => (
+  <Side orientation="left">
     <StyledSocialList id="social">
       {socialMedia &&
         socialMedia.map(({ url, name }, i) => (

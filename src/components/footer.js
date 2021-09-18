@@ -101,11 +101,7 @@ const StyledFooterContent = styled.div`
   }
 
   .status-btn:hover {
-    background: linear-gradient(90deg, #ff7f51, #e85333, #a02817);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    outline: 0;
+    color: var(--accent);
     transition: all 0.4s ease-out;
   }
 
@@ -125,7 +121,7 @@ const StyledClock = styled.time`
   }
 
   .icon.baseline svg {
-    top: 0.2em;
+    top: 0.1em;
     position: relative;
   }
   .icon {

@@ -1,4 +1,4 @@
-export { default as IconAppStore } from './appstore';
+export { default as IconTemperature } from './temperature';
 export { default as IconFacebook } from './facebook';
 export { default as IconExternal } from './external';
 export { default as IconFolder } from './folder';
@@ -10,7 +10,7 @@ export { default as IconLinkedin } from './linkedin';
 export { default as IconLoader } from './loader';
 export { default as IconLogo } from './logo';
 export { default as IconPlayStore } from './playstore';
-export { default as IconStar } from './star';
+export { default as IconLocation } from './location';
 export { default as IconTwitter } from './twitter';
 export { default as IconZap } from './zap';
 export { default as IconContact } from './card';

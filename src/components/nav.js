@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { IconLogo } from '@components/icons';
+import { Icon } from '@components/icons';
 import { ThemeContext, Toggle } from '@components';
 
 const StyledHeader = styled.header`
@@ -118,6 +118,7 @@ const LeftWrapper = styled.div`
     display: inline-block;
     transform: translateX(-2ch);
     opacity: 0;
+    color: var(--accent);
     transition: all 0.6s ease;
     @media (max-width: 950px) {
       display: none;
@@ -125,17 +126,14 @@ const LeftWrapper = styled.div`
   }
   .city:hover {
     color: var(--accent);
-    transition: all 0.6s ease;
+    transition: 0.7s ease;
   }
   .city:hover .nav-temp-extension {
     transform: translateX(0);
     opacity: 1;
-    color: var(--accent);
-    transition: all 0.6s ease;
   }
   .city:hover .nav-temp-extension:before {
     transform: translateX(0);
-    transition: all 0.6s ease;
   }
 `;
 
@@ -191,22 +189,6 @@ const Nav = () => {
     });
   };
 
-  // useEffect(() => {
-
-  //   const DOM = {
-  //     nav: document.querySelector('#navy'),
-  //   };
-
-  //   gsap.set(DOM.nav.children, { opacity: 0 });
-  //   gsap.to([DOM.nav.children, DOM.nav], {
-  //     duration: 0.9,
-  //     ease: 'back.out',
-  //     startAt: { opacity: 0, scale: 1.2 },
-  //     scale: 1,
-  //     opacity: 1,
-  //   }, 'a');
-  // }, []);
-
   return (
     <StyledHeader id="nav-bar">
       <StyledMenu>
@@ -217,35 +199,19 @@ const Nav = () => {
             role="button"
             onClick={handleLocation}
             onKeyDown={handleLocation}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16">
-              <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-            </svg>
+            <Icon name="Location" />
             {weatherInfo.city}
             <span className="nav-temp-extension noselect">(get my location)</span>
           </span>
           <span className="nav-temp noselect">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              id="test"
-              fill="currentColor"
-              viewBox="0 0 16 16">
-              <path d="M8 14a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-              <path d="M8 0a2.5 2.5 0 0 0-2.5 2.5v7.55a3.5 3.5 0 1 0 5 0V2.5A2.5 2.5 0 0 0 8 0zM6.5 2.5a1.5 1.5 0 1 1 3 0v7.987l.167.15a2.5 2.5 0 1 1-3.333 0l.166-.15V2.5z" />
-            </svg>
+            <Icon name="Temperature" />
             {Math.round(weatherInfo.temperature)}℃
           </span>
         </LeftWrapper>
 
         <StyledLogo className="logo" tabIndex="-1">
           <Link to="/" aria-label="home">
-            <IconLogo />
+            <Icon name="Logo" />
           </Link>
         </StyledLogo>
 

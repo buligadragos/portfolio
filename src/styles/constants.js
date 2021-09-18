@@ -16,16 +16,12 @@ export const COLORS = {
     dark: '#AAAAB1',
   },
   accent: {
-    light: 'linear-gradient(90deg,#ff7f51,#e85333,#a02817)',
-    dark: 'linear-gradient(90deg,#ff7f51,#e85333,#a02817)',
+    light: '#bb311e',
+    dark: '#bb311e',
   },
   shadow: {
     light: 'hsla(0,0%,10%,0.1)',
     dark: 'hsla(0,0%,0%,0.9)',
-  },
-  loaderbg: {
-    light: '#FFF8E7',
-    dark: '#09090C',
   },
   hoverbg: {
     light: '#FFFBF1',
