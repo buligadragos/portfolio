@@ -23,6 +23,10 @@ export const COLORS = {
     light: 'hsla(0,0%,10%,0.1)',
     dark: 'hsla(0,0%,0%,0.9)',
   },
+  loaderbg: {
+    light: '#FFF8E7',
+    dark: '#09090C',
+  },
   hoverbg: {
     light: '#FFFBF1',
     dark: '#1B1C23',

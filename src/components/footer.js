@@ -190,8 +190,10 @@ const Footer = () => {
           </ul>
         </StyledSocialLinks>
         <div className="site-status">
-          <DotUpTime />
-          <span className="status-btn">Status</span>
+          <a href="https://status.buligadragos.ro/">
+            <DotUpTime />
+            <span className="status-btn">Status</span>
+          </a>
         </div>
       </StyledFooterContent>
     </StyledFooter>

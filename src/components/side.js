@@ -23,7 +23,7 @@ const StyledSideElement = styled.div`
   }
 
   @media (max-width: 550px) {
-    display: ${props => (props.orientation === 'right' ? 'inherit' : 'none')};
+    display: none;
   }
 `;
 

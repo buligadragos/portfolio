@@ -29,6 +29,7 @@ const Scroll = callbacks => {
 
     setTimeout(function() {
       locomotiveScroll.update();
+      ScrollTrigger.refresh();
     }, 100);
 
     // Exposing to the global scope for ease of use.
@@ -85,7 +86,7 @@ const Scroll = callbacks => {
         end: 'bottom bottom',
         onUpdate: self => {
           gsap.to(DOM.scrollbar, {
-            scaleY: self.progress.toFixed(3),
+            scaleY: self.progress.toFixed(5),
             ease: Power0.easeOut,
             transformOrigin: 'top center',
           });
