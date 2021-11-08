@@ -230,6 +230,8 @@ const Featured = () => {
               external
               github
               slug
+              apistatus
+              id
             }
             html
           }
@@ -248,7 +250,7 @@ const Featured = () => {
         {featuredProjects &&
           featuredProjects.map(({ node }, i) => {
             const { frontmatter } = node;
-            const { title, coverlg, coversm, tech, external } = frontmatter;
+            const { title, coverlg, coversm, tech, external, id } = frontmatter;
             const coverdesktop = getImage(coverlg);
             const covermobile = getImage(coversm);
 
@@ -281,7 +283,9 @@ const Featured = () => {
                     </div>
 
                     <div className="right-side">
-                      <div className="project-status">{external && <DotUpTime />}</div>
+                      <div className="project-status">
+                        <DotUpTime statusApiId={id} />
+                      </div>
                     </div>
                   </div>
                 </div>

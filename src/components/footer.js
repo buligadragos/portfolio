@@ -191,7 +191,7 @@ const Footer = () => {
         </StyledSocialLinks>
         <div className="site-status">
           <a href="https://status.buligadragos.ro/">
-            <DotUpTime />
+            <DotUpTime statusApiId={999} />
             <span className="status-btn">Status</span>
           </a>
         </div>
