@@ -99,11 +99,9 @@ const About = () => (
             <a href="https://www.ubbcluj.ro/en/" className="inline-link scarlet">
               Babes-Bolyai University
             </a>
-            , and working as a freelancer on{' '}
-            <a
-              href="https://www.upwork.com/freelancers/~0187fc4de875739745"
-              className="inline-link scarlet">
-              Upwork
+            , and working as Junior Survey Programmer at{' '}
+            <a href="https://tolunacorporate.com/" className="inline-link scarlet">
+              Toluna Corporate
             </a>
             .{' '}
           </p>

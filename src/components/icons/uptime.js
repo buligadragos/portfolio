@@ -59,9 +59,6 @@ const Uptime = styled.div`
 `;
 
 const DotUpTime = ({ statusApiId }) => {
-  let numberOfDown = 0;
-  let numberOfDegraded = 0;
-
   const [StatusInfo, setStatusInfo] = useState({
     status: null,
   });
@@ -69,45 +66,57 @@ const DotUpTime = ({ statusApiId }) => {
   const [OverallStatusInfo, setOverallStatusInfo] = useState(null);
 
   useEffect(() => {
-    // if (process.env.NODE_ENV !== 'production') {
-    //   return;
-    // }
-    if (statusApiId !== 999) {
-      fetch('https://raw.githubusercontent.com/buligadragos/UpTime/master/history/summary.json')
-        .then(response => response.json())
-        .then(json => {
-          const { status } = json[statusApiId];
-          setStatusInfo({
-            status: status,
-          });
-        })
-        .catch(e => console.error(e));
-    } else if (statusApiId === 999) {
-      fetch('https://raw.githubusercontent.com/buligadragos/UpTime/master/history/summary.json')
-        .then(response => response.json())
-        .then(json => {
-          for (let i = 0; i < json.length; i++) {
-            if (json[i].status === 'down') {
-              numberOfDown++;
-            }
-            if (json[i].status === 'up') {
-              numberOfDegraded++;
-            }
-          }
-          if (numberOfDown === 0) {
-            if (numberOfDegraded === 0) {
-              setOverallStatusInfo('up');
-            } else {
-              setOverallStatusInfo('degraded');
-            }
-          } else if (numberOfDown === json.length - 1) {
-            setOverallStatusInfo('down');
-          } else {
-            setOverallStatusInfo('partial');
-          }
-        })
-        .catch(e => console.error(e));
+    if (process.env.NODE_ENV !== 'production') {
+      return;
     }
+    function getAPIData() {
+      let numberOfDown = 0;
+      let numberOfDegraded = 0;
+      if (statusApiId !== 999) {
+        fetch('https://raw.githubusercontent.com/buligadragos/UpTime/master/history/summary.json')
+          .then(response => response.json())
+          .then(json => {
+            const { status } = json[statusApiId];
+            setStatusInfo({
+              status: status,
+            });
+          })
+          .catch(e => console.error(e));
+      } else if (statusApiId === 999) {
+        fetch('https://raw.githubusercontent.com/buligadragos/UpTime/master/history/summary.json')
+          .then(response => response.json())
+          .then(json => {
+            for (let i = 0; i < json.length; i++) {
+              if (json[i].status === 'down') {
+                numberOfDown++;
+              }
+              if (json[i].status === 'degraded') {
+                numberOfDegraded++;
+              }
+            }
+            if (numberOfDown === 0) {
+              if (numberOfDegraded === 0) {
+                setOverallStatusInfo('up');
+              } else {
+                setOverallStatusInfo('degraded');
+              }
+            } else if (numberOfDown === json.length - 1) {
+              setOverallStatusInfo('down');
+            } else {
+              setOverallStatusInfo('partial');
+            }
+          })
+          .catch(e => console.error(e));
+      }
+    }
+
+    getAPIData();
+    const interval = setInterval(() => {
+      getAPIData();
+    }, 300000);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return (

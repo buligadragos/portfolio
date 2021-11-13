@@ -31,6 +31,10 @@ export const COLORS = {
     light: '#FFFBF1',
     dark: '#1B1C23',
   },
+  tooltip: {
+    light: 'hsl(36, 23.8%, 95.9%);',
+    dark: 'hsl(0, 0%, 0%);',
+  },
 };
 
 export const COLOR_MODE_KEY = 'color-mode';

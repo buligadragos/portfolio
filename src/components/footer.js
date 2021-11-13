@@ -97,7 +97,6 @@ const StyledFooterContent = styled.div`
     flex-grow: 1;
     flex-basis: 25%;
     position: relative;
-    cursor: pointer;
   }
 
   .status-btn:hover {
@@ -112,6 +111,72 @@ const StyledFooterContent = styled.div`
 
   .status-btn {
     margin-left: 8px;
+  }
+
+  //text-shadow
+  .hint {
+    position: relative;
+    display: inline-block;
+  }
+
+  .hint:before,
+  .hint:after {
+    position: absolute;
+    opacity: 0;
+    z-index: 1000000;
+    -webkit-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+    transition: 0.3s ease;
+    pointer-events: none;
+  }
+
+  .hint:hover:before,
+  .hint:hover:after {
+    opacity: 1;
+  }
+
+  .hint:before {
+    content: '';
+    position: absolute;
+    border: 6px solid transparent;
+    position: absolute;
+  }
+
+  .hint:after {
+    content: attr(data-hint);
+    background: var(--tooltip);
+    font-family: var(--font-mono);
+    color: var(--text);
+    padding: 8px 10px;
+    font-size: 12px;
+    white-space: nowrap;
+    box-shadow: 1px 1px 20px rgba(188, 108, 98, 0.3);
+    border-radius: 100px;
+  }
+
+  /* top */
+
+  .hint--top:before {
+    bottom: 27px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0 0 -18px 0;
+    border-top-color: var(--tooltip);
+  }
+
+  .hint--top:after {
+    bottom: 27px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0 0 -6px -10px;
+  }
+
+  .hint--top:hover:before {
+    margin-bottom: -10px;
+  }
+
+  .hint--top:hover:after {
+    margin-bottom: 2px;
   }
 `;
 
@@ -140,12 +205,42 @@ const Footer = () => {
   const serverTime = 'Europe/Bucharest';
   const [today, setDate] = useState(new Date());
 
+  const [UpdatedAt, setUpdatedAt] = useState({
+    timeupdated: null,
+  });
+
   useEffect(() => {
     const timer = setInterval(() => {
       setDate(new Date());
     }, 1000);
     return () => {
       clearInterval(timer);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'production') {
+      return;
+    }
+    function getAPIDataTime() {
+      fetch('https://api.github.com/repos/buligadragos/UpTime/actions/runs')
+        .then(response => response.json())
+        .then(json => {
+          const { updated_at } = json.workflow_runs[0];
+
+          setUpdatedAt({
+            timeupdated: new Date(updated_at).toLocaleString(),
+          });
+        })
+        .catch(e => console.error(e));
+    }
+
+    getAPIDataTime();
+    const interval = setInterval(() => {
+      getAPIDataTime();
+    }, 300000);
+    return () => {
+      clearInterval(interval);
     };
   }, []);
 
@@ -175,7 +270,7 @@ const Footer = () => {
         </div>
 
         <div className="middle">
-          <span>© 2021 Buliga Dragos. All rights reserved</span>
+          <span>Buliga Dragos © 2021. All Rights Reserved.</span>
         </div>
         <StyledSocialLinks>
           <ul>
@@ -189,8 +284,12 @@ const Footer = () => {
               ))}
           </ul>
         </StyledSocialLinks>
+
         <div className="site-status">
-          <a href="https://status.buligadragos.ro/">
+          <a
+            href="https://status.buligadragos.ro/"
+            data-hint={`Last updated at ${UpdatedAt.timeupdated}`}
+            className="hint  hint--top">
             <DotUpTime statusApiId={999} />
             <span className="status-btn">Status</span>
           </a>
