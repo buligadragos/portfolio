@@ -74,7 +74,8 @@ const StyledPic = styled.div`
 
   .img {
     mix-blend-mode: multiply;
-    filter: grayscale(100%) contrast(1);
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
     transition: var(--transition);
   }
 `;
