@@ -190,7 +190,7 @@ const StyledClock = styled.time`
   }
 
   .icon.baseline svg {
-    top: 0.1em;
+    top: 0.2em;
     position: relative;
   }
   .icon {
