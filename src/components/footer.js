@@ -127,6 +127,7 @@ const StyledFooterContent = styled.div`
     -moz-transition: 0.3s ease;
     transition: 0.3s ease;
     pointer-events: none;
+    overflow-x: hidden;
   }
 
   .hint:hover:before,
@@ -190,7 +191,7 @@ const StyledClock = styled.time`
   }
 
   .icon.baseline svg {
-    top: 0.2em;
+    top: 0.15em;
     position: relative;
   }
   .icon {
