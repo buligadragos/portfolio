@@ -113,7 +113,6 @@ const StyledFooterContent = styled.div`
     margin-left: 8px;
   }
 
-  //text-shadow
   .hint {
     position: relative;
     display: inline-block;
@@ -154,8 +153,6 @@ const StyledFooterContent = styled.div`
     border-radius: 100px;
   }
 
-  /* top */
-
   .hint--top:before {
     bottom: 27px;
     left: 50%;
@@ -177,6 +174,13 @@ const StyledFooterContent = styled.div`
 
   .hint--top:hover:after {
     margin-bottom: 2px;
+  }
+
+  @media (max-width: 810px) {
+    .hint--top:hover:after,
+    .hint--top:hover:before {
+      display: none;
+    }
   }
 `;
 

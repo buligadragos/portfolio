@@ -67,13 +67,11 @@ const StyledPic = styled.div`
       outline: 0;
       .img {
         filter: none;
-        mix-blend-mode: normal;
       }
     }
   }
 
   .img {
-    mix-blend-mode: multiply;
     filter: grayscale(100%);
     -webkit-filter: grayscale(100%);
     transition: var(--transition);
