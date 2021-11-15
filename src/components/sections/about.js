@@ -66,13 +66,15 @@ const StyledPic = styled.div`
       background: transparent;
       outline: 0;
       .img {
+        -webkit-filter: grayscale(0);
         filter: none;
       }
     }
   }
 
   .img {
-    filter: grayscale(100%);
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
     -webkit-filter: grayscale(100%);
     transition: var(--transition);
   }
@@ -136,7 +138,7 @@ const About = () => (
         <div className="wrapper">
           <StaticImage
             className="img"
-            src="../../images/me.jpg"
+            src="../../images/me.jpeg"
             width={500}
             quality={95}
             formats={['AUTO', 'WEBP', 'AVIF']}

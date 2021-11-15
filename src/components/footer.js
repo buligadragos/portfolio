@@ -176,7 +176,7 @@ const StyledFooterContent = styled.div`
     margin-bottom: 2px;
   }
 
-  @media (max-width: 810px) {
+  @media (max-width: 1280px) {
     .hint--top:hover:after,
     .hint--top:hover:before {
       display: none;
