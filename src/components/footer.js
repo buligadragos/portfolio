@@ -294,7 +294,7 @@ const Footer = () => {
           <a
             href="https://status.buligadragos.ro/"
             data-hint={`Last updated at ${UpdatedAt.timeupdated}`}
-            className="hint  hint--top">
+            className="hint hint--top">
             <DotUpTime statusApiId={999} />
             <span className="status-btn">Status</span>
           </a>
