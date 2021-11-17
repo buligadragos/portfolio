@@ -13,5 +13,3 @@ export { default as Featured } from './sections/featured';
 export { default as Contact } from './sections/contact';
 export { ThemeProvider, ThemeContext } from './ThemeContext';
 export { default as Toggle } from './toggle';
-export { default as ScrollAnimation } from './scrollAnimation';
-export { default as ScrollForMore } from './scrollForMore';

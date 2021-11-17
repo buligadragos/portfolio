@@ -3,7 +3,7 @@ import { useStaticQuery, graphql, Link } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import { Icon } from '@components/icons';
-import DotUpTime from '../icons/uptime';
+import DotUpTime from '../uptime';
 
 const StyledProjectsGrid = styled.ul`
   list-style: none;
@@ -229,8 +229,6 @@ const Featured = () => {
               tech
               external
               github
-              slug
-              apistatus
               id
             }
             html

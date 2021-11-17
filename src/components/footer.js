@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Icon } from '@components/icons';
 import { socialMedia } from '@config';
-import DotUpTime from '../components/icons/uptime';
+import DotUpTime from './uptime';
 import IconGlobe from './icons/globe';
 
 const StyledSocialLinks = styled.div`

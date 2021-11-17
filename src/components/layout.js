@@ -209,7 +209,7 @@ const Layout = ({ children, location }) => {
                   cookieName="myAwesomeCookieName2"
                   buttonClasses="ok-btn"
                   disableStyles={true}
-                  debug={true}>
+                  debug={false}>
                   <IconCookie />
                   <p className="text">
                     This website use{' '}
