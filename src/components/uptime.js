@@ -80,8 +80,7 @@ const DotUpTime = ({ statusApiId }) => {
             setStatusInfo({
               status: status,
             });
-          })
-          .catch(e => console.error(e));
+          });
       } else if (statusApiId === 999) {
         fetch('https://raw.githubusercontent.com/buligadragos/UpTime/master/history/summary.json')
           .then(response => response.json())
@@ -105,8 +104,7 @@ const DotUpTime = ({ statusApiId }) => {
             } else {
               setOverallStatusInfo('partial');
             }
-          })
-          .catch(e => console.error(e));
+          });
       }
     }
 

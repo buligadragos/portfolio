@@ -236,8 +236,7 @@ const Footer = () => {
           setUpdatedAt({
             timeupdated: new Date(updated_at).toLocaleString(),
           });
-        })
-        .catch(e => console.error(e));
+        });
     }
 
     getAPIDataTime();
@@ -294,7 +293,8 @@ const Footer = () => {
           <a
             href="https://status.buligadragos.ro/"
             data-hint={`Last updated at ${UpdatedAt.timeupdated}`}
-            className="hint hint--top">
+            className="hint hint--top"
+          >
             <DotUpTime statusApiId={999} />
             <span className="status-btn">Status</span>
           </a>
