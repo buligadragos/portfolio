@@ -124,6 +124,18 @@ const Layout = ({ children, location }) => {
   const isFirstMount = !location.action;
   const [isLoading, setIsLoading] = useState(isFirstMount);
 
+  // eslint-disable-next-line no-console
+  console.log(
+    '\n\n██████╗ ██╗   ██╗██╗     ██╗ ██████╗  █████╗     ██████╗ ██████╗  █████╗  ██████╗  ██████╗ ███████╗  \n██╔══██╗██║   ██║██║     ██║██╔════╝ ██╔══██╗    ██╔══██╗██╔══██╗██╔══██╗██╔════╝ ██╔═══██╗██╔════╝  \n██████╔╝██║   ██║██║     ██║██║  ███╗███████║    ██║  ██║██████╔╝███████║██║  ███╗██║   ██║███████╗  \n██╔══██╗██║   ██║██║     ██║██║   ██║██╔══██║    ██║  ██║██╔══██╗██╔══██║██║   ██║██║   ██║╚════██║  \n██████╔╝╚██████╔╝███████╗██║╚██████╔╝██║  ██║    ██████╔╝██║  ██║██║  ██║╚██████╔╝╚██████╔╝███████║  \n╚═════╝  ╚═════╝ ╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝     \n                                                                       \n\n  ',
+  ),
+  // eslint-disable-next-line no-console
+  console.log('%c Oh my heavens! ', 'background: #222; color: #bada55'),
+  // eslint-disable-next-line no-console
+  console.log(
+    '%c Thanks a lot for showing this much interest and coming all the way to DevTools, I\'m flattered! 😊',
+    'background: #222; color: #bada55',
+  );
+
   // Sets target="_blank" rel="noopener noreferrer" on external links
   const handleExternalLinks = () => {
     const allLinks = Array.from(document.querySelectorAll('a'));
@@ -209,7 +221,8 @@ const Layout = ({ children, location }) => {
                   cookieName="myAwesomeCookieName2"
                   buttonClasses="ok-btn"
                   disableStyles={true}
-                  debug={false}>
+                  debug={false}
+                >
                   <IconCookie />
                   <p className="text">
                     This website use{' '}
@@ -225,7 +238,8 @@ const Layout = ({ children, location }) => {
                     height="25"
                     viewBox="0 0 25 25"
                     fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <circle cx="12.5" cy="12.5" r="12" stroke="white" strokeOpacity="0.5"></circle>
                     <path d="M9.28516 16.4287L16.428 9.28585" stroke="white"></path>
                     <path d="M9.28516 9.28564L16.428 16.4285" stroke="white"></path>
