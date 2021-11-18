@@ -1,6 +1,6 @@
 import { keyframes, css } from 'styled-components';
 
-import GrainImage from '../images/noise.jpg';
+import GrainImage from '../images/grain.png';
 
 const Grain = keyframes`
   0%, 100% { transform:translate(0, 0); }
@@ -17,13 +17,13 @@ const Grain = keyframes`
 
 const Noise = css`
   body::before {
-    -webkit-animation: ${Grain} 8s steps(10) infinite;
-    animation: ${Grain} 8s steps(10) infinite;
+    -webkit-animation: ${Grain} 10s steps(15) infinite;
+    animation: ${Grain} 10s steps(15) infinite;
     background-image: url(${GrainImage});
     content: '';
     height: 300%;
     left: -50%;
-    opacity: 0.06;
+    opacity: 0.75;
     position: fixed;
     top: -110%;
     width: 300%;

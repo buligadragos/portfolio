@@ -1,33 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
-import sr from '@utils/sr';
-import { srConfig } from '@config';
-import { Icon, IconArchive } from '@components/icons';
-
-const Icons = styled.span`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 2.077vw;
-  height: 1.806vw;
-  margin-left: 0.26vw;
-  overflow: hidden;
-
-  svg {
-    position: absolute;
-    transition: transform 0.7s cubic-bezier(0.4, 0, 0, 1);
-  }
-
-  @media (max-width: 550px) {
-    margin-left: 2.26vw;
-    width: 4.077vw;
-    height: 3.806vw;
-  }
-`;
+import { Icon } from '@components/icons';
+import DotUpTime from '../uptime';
 
 const StyledProjectsGrid = styled.ul`
   list-style: none;
@@ -74,7 +50,10 @@ const StyledProject = styled.li`
 
     li {
       margin: 0 20px 5px 0;
-      color: var(--accent);
+      background: linear-gradient(90deg, #ff7f51, #e85333, #a02817);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
       font-family: var(--font-mono);
       font-size: var(--fz-xs);
       white-space: nowrap;
@@ -84,37 +63,12 @@ const StyledProject = styled.li`
       margin: 10px 0;
       li {
         margin: 0 10px 5px 0;
-        color: var(--accent);
       }
     }
   }
 
-  .project-links {
-    display: flex;
-    align-items: center;
-    position: relative;
-    margin-left: -10px;
-    color: var(--headline);
-
-    a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0 0 0 20px;
-
-      &.external {
-        svg {
-          width: 22px;
-          height: 22px;
-          margin-top: -4px;
-        }
-      }
-
-      svg {
-        width: 20px;
-        height: 20px;
-      }
-    }
+  .project-status {
+    margin-right: 10px;
   }
 
   .right-side {
@@ -243,21 +197,19 @@ const StyledArchiveLink = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 80px auto 0;
+  margin-right: 2.2em;
 
-  .archive-link {
+  .subtitle {
     font-family: var(--font-sans);
     font-size: var(--fz-xl);
-    &:after {
-      bottom: 0.1em;
-    }
   }
 `;
 
 const Featured = () => {
   const data = useStaticQuery(graphql`
-  {
+    {
       featured: allMarkdownRemark(
-        filter: { fileAbsolutePath: { regex: "/works/" } }
+        filter: { fileAbsolutePath: { regex: "/featured/" } }
         sort: { fields: [frontmatter___date], order: DESC }
       ) {
         edges {
@@ -277,7 +229,7 @@ const Featured = () => {
               tech
               external
               github
-              slug
+              id
             }
             html
           }
@@ -288,32 +240,22 @@ const Featured = () => {
 
   const featuredProjects = data.featured.edges.filter(({ node }) => node);
 
-  const revealArchiveLink = useRef(null);
-  const revealTitle = useRef(null);
-  const revealProjects = useRef([]);
-  useEffect(() => {
-    sr.reveal(revealTitle.current, srConfig());
-    revealProjects.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 100)));
-  }, []);
-
   return (
-    <section id="projects">
-      <h2 className="numbered-heading" ref={revealTitle}>
-        Some Things I’ve Built
-      </h2>
+    <section id="projects" data-scroll-section>
+      <h2 className="numbered-heading">Some Things I’ve Built</h2>
 
       <StyledProjectsGrid>
         {featuredProjects &&
           featuredProjects.map(({ node }, i) => {
             const { frontmatter } = node;
-            const { title, coverlg, coversm, slug, tech, github, external } = frontmatter;
+            const { title, coverlg, coversm, tech, external, id } = frontmatter;
             const coverdesktop = getImage(coverlg);
             const covermobile = getImage(coversm);
 
             return (
-              <StyledProject key={i} ref={el => (revealProjects.current[i] = el)}>
+              <StyledProject key={i}>
                 <div className="project-preview">
-                  <Link to={slug} className="prew">
+                  <a href={external} className="prew">
                     <StyledProjectPreview>
                       <El1>
                         <GatsbyImage image={coverdesktop} alt={title} className="img" />
@@ -324,13 +266,11 @@ const Featured = () => {
                         <span className="hovl" />
                       </El2>
                     </StyledProjectPreview>
-                  </Link>
+                  </a>
 
                   <div className="project-details">
                     <div className="left-side">
-                      <h3 className="project-title">
-                        <Link to={slug}>{title}</Link>
-                      </h3>
+                      <h3 className="project-title">{title}</h3>
                       {tech.length && (
                         <ul className="project-tech-list">
                           {tech.map((tech, i) => (
@@ -341,17 +281,8 @@ const Featured = () => {
                     </div>
 
                     <div className="right-side">
-                      <div className="project-links">
-                        {github && (
-                          <a href={github} aria-label="GitHub Link">
-                            <Icon name="GitHub" />
-                          </a>
-                        )}
-                        {external && (
-                          <a href={external} aria-label="External Link" className="external">
-                            <Icon name="External" />
-                          </a>
-                        )}
+                      <div className="project-status">
+                        <DotUpTime statusApiId={id} />
                       </div>
                     </div>
                   </div>
@@ -361,12 +292,9 @@ const Featured = () => {
           })}
 
         <StyledArchiveLink>
-          <Link className="svgbutton" to="/works" ref={revealArchiveLink}>
+          <Link to="/archive" className="subtitle inline-link">
             View the archive
-            <Icons className="icons">
-              <IconArchive className="svgicon-vis" />
-              <IconArchive className="svgicon-hide" />
-            </Icons>
+            <Icon name="Archive" />
           </Link>
         </StyledArchiveLink>
       </StyledProjectsGrid>

@@ -10,49 +10,6 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
-exports.createPages = async ({ actions, graphql, reporter }) => {
-  const { createPage } = actions;
-  const workTemplate = path.resolve('src/templates/work.js');
-
-  const result = await graphql(`
-    {
-      worksRemark: allMarkdownRemark(
-        filter: { fileAbsolutePath: { regex: "/works/" } }
-        sort: { order: DESC, fields: [frontmatter___date] }
-        limit: 1000
-      ) {
-        edges {
-          node {
-            frontmatter {
-              slug
-            }
-          }
-        }
-      }
-    }
-  `);
-
-  // Handle errors
-  if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`);
-    return;
-  }
-
-  // Create work detail pages
-  const works = result.data.worksRemark.edges;
-
-  works.forEach(({ node }, index) => {
-    createPage({
-      path: node.frontmatter.slug,
-      component: workTemplate,
-      context: {
-        prev: index === 0 ? null : works[index - 1].node,
-        next: index === works.length - 1 ? null : works[index + 1].node,
-      },
-    });
-  });
-};
-
 // https://www.gatsbyjs.org/docs/node-apis/#onCreateWebpackConfig
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   // https://www.gatsbyjs.org/docs/debugging-html-builds/#fixing-third-party-modules
@@ -61,11 +18,7 @@ exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
       module: {
         rules: [
           {
-            test: /scrollreveal/,
-            use: loaders.null(),
-          },
-          {
-            test: /animejs/,
+            test: /locomotive-scroll/,
             use: loaders.null(),
           },
           {

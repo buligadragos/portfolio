@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'gatsby';
 import { Helmet } from 'react-helmet';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { navDelay } from '@utils';
 import { IconHome } from '../components/icons';
 
 const StyledMainContainer = styled.main`
@@ -51,37 +49,24 @@ const Icons = styled.span`
 `;
 
 const NotFoundPage = () => {
-  const [isMounted, setIsMounted] = useState(false);
   const revealButton = useRef([]);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), navDelay);
-    return () => clearTimeout(timeout);
-  }, []);
 
   return (
     <>
       <Helmet title="Page Not Found" />
-
-      <TransitionGroup component={null}>
-        {isMounted && (
-          <CSSTransition timeout={500} classNames="fadeup">
-            <StyledMainContainer className="fillHeight">
-              <StyledTitle>404</StyledTitle>
-              <StyledSubtitle>Page Not Found</StyledSubtitle>
-              <StyledArchiveLink ref={revealButton}>
-                <Link className="svgbutton" to="/">
-                  Back to home
-                  <Icons className="icons">
-                    <IconHome className="svgicon-vis" />
-                    <IconHome className="svgicon-hide" />
-                  </Icons>
-                </Link>
-              </StyledArchiveLink>
-            </StyledMainContainer>
-          </CSSTransition>
-        )}
-      </TransitionGroup>
+      <StyledMainContainer className="fillHeight">
+        <StyledTitle>404</StyledTitle>
+        <StyledSubtitle>Page Not Found</StyledSubtitle>
+        <StyledArchiveLink ref={revealButton}>
+          <Link className="svgbutton" to="/">
+            Back to home
+            <Icons className="icons">
+              <IconHome className="svgicon-vis" />
+              <IconHome className="svgicon-hide" />
+            </Icons>
+          </Link>
+        </StyledArchiveLink>
+      </StyledMainContainer>
     </>
   );
 };

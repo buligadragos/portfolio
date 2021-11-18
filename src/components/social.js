@@ -12,21 +12,9 @@ const StyledSocialList = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
-
-  &:after {
-    content: '';
-    display: block;
-    width: 1px;
-    height: 90px;
-    margin: 0 auto;
-    background-color: var(--grey);
-  }
+  opacity: 0;
 
   li {
-    &:last-of-type {
-      margin-bottom: 20px;
-    }
-
     a {
       padding: 10px;
 
@@ -43,9 +31,9 @@ const StyledSocialList = styled.ul`
   }
 `;
 
-const Social = ({ isFirstMount }) => (
-  <Side isFirstMount={isFirstMount} orientation="left">
-    <StyledSocialList>
+const Social = () => (
+  <Side orientation="left">
+    <StyledSocialList id="social">
       {socialMedia &&
         socialMedia.map(({ url, name }, i) => (
           <li key={i}>

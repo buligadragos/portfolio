@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import styled, { css } from 'styled-components';
-import { loaderDelay } from '@utils';
-import { useScrollDirection } from '@hooks';
-import { IconLogo } from '@components/icons';
+import styled from 'styled-components';
+import { Icon } from '@components/icons';
 import { ThemeContext, Toggle } from '@components';
 
 const StyledHeader = styled.header`
@@ -15,58 +12,31 @@ const StyledHeader = styled.header`
   align-items: center;
   width: 100vw;
   height: 4rem;
-
-  ${props =>
-    props.scrollDirection === 'up' &&
-    !props.scrolledToTop &&
-    css`
-      .logo-vis {
-        transform: translateX(0px) !important;
-      }
-    `};
-
-  ${props =>
-    props.scrollDirection === 'down' &&
-    !props.scrolledToTop &&
-    css`
-      .logo-fill {
-        fill: transparent !important;
-        transform: translateX(85px) !important;
-      }
-
-      .logo-vis {
-        fill: var(--headline);
-      }
-
-      #logo-dot {
-        transform: translateX(-310px) !important;
-      }
-
-      #logo-b {
-        transform: translateX(310px) !important;
-      }
-    `};
+  opacity: 0;
 `;
 
 const StyledLogo = styled.div`
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  a {
+    position: fixed;
+    top: 1.45rem;
+    left: 50%;
+    width: 7.43056vw;
+    min-width: 110px;
+    transform: translateX(-50%);
+    z-index: 2;
+    pointer-events: all;
+
+    @media (max-width: 550px) {
+      top: 1rem;
+      width: 33.43056vw;
+    }
+  }
 
   svg {
-    fill: white;
-    transition: var(--transition);
-    width: 170px;
-    height: 42px;
-  }
-  .logo-fill {
     fill: var(--headline);
-    transition: all 0.3s;
-  }
-
-  .logo-vis {
-    fill: var(--headline);
-    transition: all 0.3s;
+    display: block;
+    width: 100%;
+    height: auto;
   }
 `;
 
@@ -76,6 +46,7 @@ const RightWrapper = styled.div`
   flex-direction: column;
   width: auto;
   height: auto;
+  font-family: var(--font-mono);
   line-height: normal;
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -114,48 +85,55 @@ const LeftWrapper = styled.div`
   flex-direction: column;
   width: auto;
   height: auto;
+  font-family: var(--font-mono);
   color: var(--headline);
   line-height: normal;
   font-size: 0.8rem;
   text-transform: uppercase;
-  transition: all 0.5s ease;
 
-  span {
-    transition: all 0.5s ease;
-    @media (max-width: 550px) {
+  .city {
+    margin-bottom: 0.3rem;
+    cursor: pointer;
+  }
+
+  .nav-temp {
+    text-decoration: none;
+    justify-self: start;
+    display: flex;
+    color: var(--headline);
+  }
+  .nav-temp svg {
+    width: 1.2em;
+    margin-right: 0.5ch;
+  }
+
+  .nav-temp-extension::before {
+    display: inline-block;
+    content: ' — ';
+    transform: translateX(-2ch);
+    transition: all 0.6s ease;
+  }
+
+  .nav-temp-extension {
+    display: inline-block;
+    transform: translateX(-2ch);
+    opacity: 0;
+    color: var(--accent);
+    transition: all 0.6s ease;
+    @media (max-width: 950px) {
       display: none;
     }
   }
-
-  .city {
-    padding-bottom: 0.6rem;
-    padding-top: 0.3rem;
-  }
-
-  .getlocation {
-    transform: translateY(50px);
-    position: absolute;
-    top: 1.5rem;
-    cursor: pointer;
+  .city:hover {
     color: var(--accent);
+    transition: 0.7s ease;
   }
-
-  :hover .city {
-    transform: translateY(-100px);
+  .city:hover .nav-temp-extension {
+    transform: translateX(0);
+    opacity: 1;
   }
-  :hover .getlocation {
-    transform: translateY(0px);
-  }
-`;
-const StyledClock = styled.time`
-  .separator {
-    animation: blinker 2s linear infinite;
-  }
-
-  @keyframes blinker {
-    50% {
-      opacity: 0;
-    }
+  .city:hover .nav-temp-extension:before {
+    transform: translateX(0);
   }
 `;
 
@@ -178,33 +156,10 @@ const StyledMenu = styled.div`
   }
 `;
 
-const Nav = ({ isFirstMount }) => {
-  const [isMounted, setIsMounted] = useState(!isFirstMount);
-  const scrollDirection = useScrollDirection('down');
-  const [scrolledToTop, setScrolledToTop] = useState(true);
+const Nav = () => {
   const { colorMode, setColorMode } = React.useContext(ThemeContext);
   const API_URL = process.env.GATSBY_WEATHER_API_URL;
   const API_KEY = process.env.GATSBY_WEATHER_API_KEY;
-
-  const handleScroll = () => {
-    setScrolledToTop(window.pageYOffset < 50);
-  };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsMounted(true);
-    }, 100);
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      clearTimeout(timeout);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  const timeout = isFirstMount ? loaderDelay : 0;
-  const fadeDownClass = isFirstMount ? 'fadedown' : '';
 
   const [lat, setLat] = useState([45.749439]);
   const [long, setLong] = useState([21.227221]);
@@ -216,9 +171,7 @@ const Nav = ({ isFirstMount }) => {
     if (process.env.NODE_ENV !== 'production') {
       return;
     }
-    fetch(
-      `${API_URL}weather?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`,
-    )
+    fetch(`${API_URL}weather?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`)
       .then(response => response.json())
       .then(json => {
         const { main, name } = json;
@@ -229,101 +182,52 @@ const Nav = ({ isFirstMount }) => {
       });
   }, [lat, long]);
 
-  // Ora
-  const serverTime = 'Europe/Bucharest';
-  const localTime = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-  const [loc, setLoc] = useState([serverTime]);
-  const [today, setDate] = useState(new Date());
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setDate(new Date());
-    }, 60 * 1000);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
-
-  const day = today.toLocaleDateString('en-US', { weekday: 'long' });
-  const time = today.toLocaleTimeString('en-US', {
-    timeZone: loc,
-    hour: 'numeric',
-    hour12: false,
-    minute: 'numeric',
-  });
-
-  const HHMM = time.split(':');
-  const hour = HHMM[0];
-  const minutes = HHMM[1];
-
   const handleLocation = () => {
     navigator.geolocation.getCurrentPosition(function(position) {
       setLat(position.coords.latitude);
       setLong(position.coords.longitude);
     });
-    setLoc(localTime);
   };
+
   return (
-    <StyledHeader scrollDirection={scrollDirection} scrolledToTop={scrolledToTop}>
-      <TransitionGroup component={null}>
-        {isMounted && (
-          <CSSTransition classNames={fadeDownClass} timeout={timeout}>
-            <StyledMenu>
-              <LeftWrapper>
-                <span
-                  tabIndex={0}
-                  role="button"
-                  className="city"
-                  onClick={handleLocation}
-                  onKeyDown={handleLocation}>
-                  {weatherInfo.city}
-                </span>
-                <span
-                  tabIndex={0}
-                  role="button"
-                  className="getlocation"
-                  onClick={handleLocation}
-                  onKeyDown={handleLocation}>
-                  GET MY LOCATION
-                </span>
+    <StyledHeader id="nav-bar">
+      <StyledMenu>
+        <LeftWrapper>
+          <span
+            className="nav-temp city noselect"
+            tabIndex={0}
+            role="button"
+            onClick={handleLocation}
+            onKeyDown={handleLocation}>
+            <Icon name="Location" />
+            {weatherInfo.city}
+            <span className="nav-temp-extension noselect">(get my location)</span>
+          </span>
+          <span className="nav-temp noselect">
+            <Icon name="Temperature" />
+            {Math.round(weatherInfo.temperature)}℃
+          </span>
+        </LeftWrapper>
 
-                <StyledClock>
-                  <span>{day}</span> <span>{hour}</span>
-                  <span className="separator">:</span>
-                  <span>{minutes}</span>
-                </StyledClock>
-              </LeftWrapper>
+        <StyledLogo className="logo" tabIndex="-1">
+          <Link to="/" aria-label="home">
+            <Icon name="Logo" />
+          </Link>
+        </StyledLogo>
 
-              <RightWrapper>
-                <label>
-                  <input
-                    type="checkbox"
-                    onChange={ev => {
-                      setColorMode(ev.target.checked ? 'dark' : 'light');
-                    }}
-                    checked={colorMode === 'dark'}
-                  />
-                  {colorMode === 'dark' ? <Toggle name="sun" /> : <Toggle name="moon" />}
-                </label>
-                <span>{Math.round(weatherInfo.temperature)}℃</span>
-              </RightWrapper>
-            </StyledMenu>
-          </CSSTransition>
-        )}
-      </TransitionGroup>
-
-      <TransitionGroup component={null}>
-        {isMounted && (
-          <CSSTransition classNames={fadeDownClass} timeout={timeout}>
-            <StyledLogo className="logo" tabIndex="-1">
-              <Link to="/" aria-label="home">
-                <IconLogo />
-              </Link>
-            </StyledLogo>
-          </CSSTransition>
-        )}
-      </TransitionGroup>
+        <RightWrapper>
+          <label>
+            <input
+              type="checkbox"
+              onChange={ev => {
+                setColorMode(ev.target.checked ? 'dark' : 'light');
+              }}
+              checked={colorMode === 'dark'}
+            />
+            {colorMode === 'dark' ? <Toggle name="sun" /> : <Toggle name="moon" />}
+          </label>
+        </RightWrapper>
+      </StyledMenu>
     </StyledHeader>
   );
 };

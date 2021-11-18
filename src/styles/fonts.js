@@ -7,13 +7,24 @@ import JosefinSansRegularWoff2 from '@fonts/JosefinSans/JosefinSans-Regular.woff
 import JosefinSansSemiboldWoff from '@fonts/JosefinSans/JosefinSans-SemiBold.woff';
 import JosefinSansSemiboldWoff2 from '@fonts/JosefinSans/JosefinSans-SemiBold.woff2';
 
-
 import LatoRegularWoff from '@fonts/Lato/Lato-Regular.woff';
 import LatoRegularWoff2 from '@fonts/Lato/Lato-Regular.woff2';
 import LatoSemiboldWoff from '@fonts/Lato/Lato-Semibold.woff';
 import LatoSemiboldWoff2 from '@fonts/Lato/Lato-Semibold.woff2';
 
+import SilkaLightWoff from '@fonts/Silka/silka-light-webfont.woff';
+import SilkaLightWoff2 from '@fonts/Silka/silka-light-webfont.woff2';
+import SilkaRegularWoff from '@fonts/Silka/silka-regular-webfont.woff';
+import SilkaRegularWoff2 from '@fonts/Silka/silka-regular-webfont.woff2';
+import SilkaMediumWoff from '@fonts/Silka/silka-medium-webfont.woff';
+import SilkaMediumWoff2 from '@fonts/Silka/silka-medium-webfont.woff2';
 
+import ArminGroteskUltraLightWoff from '@fonts/ArminGrotesk/ArminGrotesk-UltraLight.woff';
+import ArminGroteskUltraLightWoff2 from '@fonts/ArminGrotesk/ArminGrotesk-UltraLight.woff2';
+import ArminGroteskNormalWoff from '@fonts/ArminGrotesk/ArminGrotesk-Normal.woff';
+import ArminGroteskNormalWoff2 from '@fonts/ArminGrotesk/ArminGrotesk-Normal.woff2';
+import ArminGroteskRegularWoff from '@fonts/ArminGrotesk/ArminGrotesk-Regular.woff';
+import ArminGroteskRegularWoff2 from '@fonts/ArminGrotesk/ArminGrotesk-Regular.woff2';
 
 const josefinsansNormalWeights = {
   300: [JosefinSansLightWoff, JosefinSansLightWoff2],
@@ -26,7 +37,17 @@ const latoNormalWeights = {
   600: [LatoSemiboldWoff, LatoSemiboldWoff2],
 };
 
+const silkaNormalWeights = {
+  300: [SilkaLightWoff, SilkaLightWoff2],
+  400: [SilkaRegularWoff, SilkaRegularWoff2],
+  500: [SilkaMediumWoff, SilkaMediumWoff2],
+};
 
+const armingroteskNormalWeights = {
+  200: [ArminGroteskUltraLightWoff, ArminGroteskUltraLightWoff2],
+  300: [ArminGroteskNormalWoff, ArminGroteskNormalWoff2],
+  400: [ArminGroteskRegularWoff, ArminGroteskRegularWoff2],
+};
 
 const josefinsans = {
   name: 'Josefin Sans',
@@ -36,6 +57,16 @@ const josefinsans = {
 const lato = {
   name: 'Lato',
   normal: latoNormalWeights,
+};
+
+const silka = {
+  name: 'Silka',
+  normal: silkaNormalWeights,
+};
+
+const armingrotesk = {
+  name: 'Armin Grotesk',
+  normal: armingroteskNormalWeights,
 };
 
 const createFontFaces = (family, style = 'normal') => {
@@ -62,12 +93,14 @@ const createFontFaces = (family, style = 'normal') => {
 
 const josefinsansNormal = createFontFaces(josefinsans);
 
-
 const latoNormal = createFontFaces(lato);
 
+const silkaNormal = createFontFaces(silka);
+
+const armingroteskNormal = createFontFaces(armingrotesk);
 
 const Fonts = css`
-  ${josefinsansNormal + latoNormal}
+  ${josefinsansNormal + latoNormal + silkaNormal + armingroteskNormal}
 `;
 
 export default Fonts;

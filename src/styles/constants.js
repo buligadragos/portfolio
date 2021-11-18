@@ -1,7 +1,7 @@
 export const COLORS = {
   body: {
     light: '#f5efe1',
-    dark: '#111216',
+    dark: '#161616',
   },
   headline: {
     light: '#111216',
@@ -16,8 +16,8 @@ export const COLORS = {
     dark: '#AAAAB1',
   },
   accent: {
-    light: '#AD343E',
-    dark: '#C7434E',
+    light: '#bb311e',
+    dark: '#bb311e',
   },
   shadow: {
     light: 'hsla(0,0%,10%,0.1)',
@@ -30,6 +30,10 @@ export const COLORS = {
   hoverbg: {
     light: '#FFFBF1',
     dark: '#1B1C23',
+  },
+  tooltip: {
+    light: 'hsl(36, 23.8%, 95.9%)',
+    dark: 'hsl(0, 0%, 0%)',
   },
 };
 

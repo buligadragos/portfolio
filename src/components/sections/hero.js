@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import React from 'react';
 import styled from 'styled-components';
-import { navDelay, loaderDelay } from '@utils';
 
 const StyledHeroSection = styled.section`
   display: flex;
@@ -12,6 +10,7 @@ const StyledHeroSection = styled.section`
   padding: 0;
   position: relative;
   overflow: hidden;
+  opacity: 0;
 
   @media (max-width: 480px) and (min-height: 700px) {
     padding-bottom: 10vh;
@@ -19,9 +18,12 @@ const StyledHeroSection = styled.section`
 
   h1 {
     margin: 0 0 30px 4px;
-    color: var(--accent);
     font-size: clamp(var(--fz-sm), 5vw, var(--fz-md));
     font-weight: 400;
+    background: linear-gradient(90deg, #ff7f51, #e85333, #a02817);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 
     @media (max-width: 480px) {
       margin: 0 0 20px 2px;
@@ -41,38 +43,16 @@ const StyledHeroSection = styled.section`
   }
 `;
 
-const Hero = () => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setIsMounted(true), navDelay);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  const one = <h1>Hi, my name is</h1>;
-  const two = <h2 className="big-heading">Buliga Dragos.</h2>;
-  const three = <h3 className="medium-heading">I design and code beautifully simple things.</h3>;
-  const four = (
+const Hero = () => (
+  <StyledHeroSection data-scroll-section id="hero">
+    <h1>Hi, my name is</h1>
+    <h2 className="big-heading">Buliga Dragos.</h2>
+    <h3 className="medium-heading">I design and code beautifully simple things.</h3>
     <p>
       Fueled by high energy levels and boundless enthusiasm, I’m easily inspired and more than
       willing to follow my fascinations wherever they take me.
     </p>
-  );
-
-  const items = [one, two, three, four];
-
-  return (
-    <StyledHeroSection>
-      <TransitionGroup component={null}>
-        {isMounted &&
-          items.map((item, i) => (
-            <CSSTransition key={i} classNames="fadeup" timeout={loaderDelay}>
-              <div style={{ transitionDelay: `${i + 1}00ms` }}>{item}</div>
-            </CSSTransition>
-          ))}
-      </TransitionGroup>
-    </StyledHeroSection>
-  );
-};
+  </StyledHeroSection>
+);
 
 export default Hero;
